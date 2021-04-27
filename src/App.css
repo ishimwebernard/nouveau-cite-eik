@@ -3,7 +3,7 @@
   object-fit: fill;
 }
 .backdrop-filler{
-  background: #f3f4f677;
+  background: #f3f4f6a6;
   backdrop-filter: blur(20px);
 }
 

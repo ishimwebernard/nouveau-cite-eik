@@ -6,7 +6,6 @@ import Reasons from './reasonstojoineik'
 import News from './recentNews'
 import KeyLinks from './keyLinks'
 import Footer from './footer'
-import Slider from './slider'
 
 export default function Main() {
     return (
