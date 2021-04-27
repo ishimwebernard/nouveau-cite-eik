@@ -2,11 +2,11 @@ import React from 'react'
 
 const News = ({ image,title, content }) =>{
     return (
-        <div className="grid grid-cols-4 w-full bg-white shadow-xl">
-            <img src={image}/>
-            <div className="col-span-">
-                <p>{title}</p>
-                <p>{content}</p>
+        <div className="grid grid-cols-4 w-full bg-white shadow-md space-x-8 mt-4">
+            <img src={image} className=" w-full"/>
+            <div className="col-span-3 mt-4 flex flex-col">
+                <p className="w-full text-gray-800 text-4xl">{title}</p>
+                <p className="mt-0 text-gray-500 mr-4">{content}</p>
             </div>
         </div>
     )
@@ -23,7 +23,8 @@ export default function RecentNews() {
             </svg>
             <p className="text-4xl text-green-700 ">Recent News</p>
             </div>
-            <News content="Learning helps one develop passion and enables one to find his her carrier" title="Learning is good for everyone" image="https://images.unsplash.com/photo-1557862921-37829c790f19?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"/>
+            <News content="Learning helps one develop passion and enables one to find his her carrier Learning helps one develop passion and enables one to find his her carrier" title="Learning is good for everyone" image="https://images.unsplash.com/photo-1557862921-37829c790f19?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"/>
+            <News content="Learning helps one develop passion and enables one to find his her carrier Learning helps one develop passion and enables one to find his her carrier" title="Learning is good for everyone" image="https://images.unsplash.com/photo-1557862921-37829c790f19?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"/>
         </div>
     )
 }

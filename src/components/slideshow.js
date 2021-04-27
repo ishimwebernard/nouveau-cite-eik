@@ -11,7 +11,7 @@ export default function SlideShow() {
             <Carousel>
   <Carousel.Item>
     <img
-      className="image-caroussel-size w-100 object-fill"
+      className="image-caroussel-size w-100 "
       src={girl}
       alt="First slide"
     />
