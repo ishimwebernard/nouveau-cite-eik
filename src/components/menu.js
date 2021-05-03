@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import {
-    BrowserRouter as Router,
-    Link, NavLink
-  } from "react-router-dom";
-  import WhoWeAre from './whoweare.js';
+import {Link} from "react-router-dom";
+import CustomButton from './Button';
 const Header = ({ title }) =>{
     return (
         <div className="px-6 bg-green-700">
@@ -50,6 +47,11 @@ export default function Menu() {
             </Link>
             <MenuItem itemText="About" itemArray={[{text:"Who we are", route:"whoweare"}, {text:"Mission and vision", route:"missionandvision"}, {text:"Head of School welcome", route:"hoswelcome"}]}/>
             <MenuItem itemText="Strategy" itemArray={[{text:"Duties of parents", route:"dutiesofparents"}, {text:"Duties of Students", route:"dutiesofstudents"}, {text:"Duties of Teachers", route:"dutiesofteachers"}]}/>
+            <MenuItem itemText="Student Life" itemArray={[{text:"Extracuricular Activities", route:"extracuriculatactivities"}, {text:"Student Clubs", route:"studentclubs"}]}/>
+            <MenuItem itemText="News and Events" itemArray={[{text:"News", route:"news"}, {text:"Events", route:"events"}]}/>
+              <Link to="/">
+            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">Contact Us</p>
+            </Link>
             <Header title="Login"/>
             <LoginSnippet />
         </div>
@@ -59,7 +61,9 @@ export default function Menu() {
 const LoginSnippet = () =>{
     return (
         <div>
-            <input className="transparent border-b-2 focus:outline-none" placeholder="Enter your email"/>
+            <input className="transparent bg-transparent p-2 w-full border-2 rounded-md border-green-700 focus:outline-none" placeholder="Enter your email"/>
+            <input className="transparent mt-2 bg-transparent p-2 w-full border-2 rounded-md border-green-700 focus:outline-none" type="password" placeholder="Enter your password"/>
+            <CustomButton text="Login" good={true} />
         </div>
     )
 }
