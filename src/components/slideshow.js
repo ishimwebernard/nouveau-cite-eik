@@ -5,9 +5,9 @@ import school from '../assets/Image9.jpg'
 
 export default function SlideShow() {
     return (
-    <div>
+    <div className=" h-full w-full">
         
-        <div className="h-1/2">
+        <div className="h-full">
             <Carousel>
   <Carousel.Item>
     <img

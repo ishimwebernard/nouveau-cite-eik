@@ -9,9 +9,9 @@ import Footer from './footer'
 
 export default function Main() {
     return (
-        <div className="bg-gray-100">
-            <Header />
-            <SlideShow />
+        <div className="bg-gray-100 flex flex-col">
+            <Header absolute={true} />
+            <SlideShow  />
             <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
                 <div className="col-span-2 py-2">
                     <Reasons />

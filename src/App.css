@@ -7,6 +7,10 @@
   backdrop-filter: blur(20px);
 }
 
+.centeredheight{
+  top: 50%;
+  transform: translate(0, -50%);
+}
 
 
 /* Slideshow */
@@ -50,4 +54,8 @@
 
 .slideshowDot.active {
   background-color: #6a0dad;
+}
+
+.column-count-2{
+  column-count: 2;
 }
