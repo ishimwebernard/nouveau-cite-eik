@@ -8,7 +8,7 @@ import BigCard from './bigCard'
 
 export default function DutiesOfParents() {
     return (
-        <div>
+        <div className="bg-gray-100">
             <Header absolute={false} />
            <TitleImage text="DUTIES OF PARENTS" image={Girl}/>
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">

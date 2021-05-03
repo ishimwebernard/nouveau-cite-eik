@@ -1,5 +1,5 @@
 {
-  "name": "empty-project",
+  "name": "ecole-internationale-de-kigali",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,9 +20,11 @@
   },
   "scripts": {
     "start": "craco start",
+    "dev": "craco build && craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "craco build && firebase deploy"
   },
   "eslintConfig": {
     "extends": [

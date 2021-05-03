@@ -4,11 +4,10 @@ import Girl from '../assets/Image13.jpg';
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
-import BigCard from './bigCard'
 
 export default function WhoWeAre() {
     return (
-        <div>
+        <div className="bg-gray-100">
             <Header absolute={false} />
            <TitleImage text="WHO WE ARE" image={Girl}/>
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">

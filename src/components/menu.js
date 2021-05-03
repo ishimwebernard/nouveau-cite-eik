@@ -21,7 +21,7 @@ const MenuItem = ({ itemText, itemArray, itemLink }) =>{
                     <Link to={k}  onClick={()=>{
                         setRedundant(!redundant);
                     }}>
-                <p className="text-gray-900 text-md ml-4 p-0 ">{itemArray[counter].text}</p>
+                <p className="text-gray-900 text-md ml-4 p-0 p-2 ">{itemArray[counter].text}</p>
                 </Link>
             )
         }
@@ -40,7 +40,7 @@ const MenuItem = ({ itemText, itemArray, itemLink }) =>{
 
 export default function Menu() {
     return (
-        <div>
+        <div className="flex flex-col space-y-2">
             <Header title="Menu"  />
             <Link to="/">
             <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">Home</p>

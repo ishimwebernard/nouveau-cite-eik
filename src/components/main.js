@@ -7,6 +7,7 @@ import DutiesOfParents from './dutiesOfParents'
 import DutiesOfStudents from './dutiesOfStudents'
 import DutiesOfTeachers from './dutiesOfTeachers'
 import HeadOfSchoolWelcome from './headofschoolwelcome'
+import extracuriculatactivities from './extracuricularActivities'
 
 export default function Main() {
     return (
@@ -18,6 +19,7 @@ export default function Main() {
                   <Route exact path="/dutiesofstudents" component={DutiesOfStudents} />
                   <Route exact path="/dutiesofteachers" component={DutiesOfTeachers} />
                   <Route exact path="/hoswelcome" component={HeadOfSchoolWelcome} />
+                  <Route exact path="/extracuriculatactivities" component={extracuriculatactivities} />
         </Switch>
     )
 }
