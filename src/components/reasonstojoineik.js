@@ -13,10 +13,10 @@ const main_reasons = [
 
 const ReasonItem = ({ number, title, subtitle }) =>{
     return (
-            <div className=" items-center px-40">
-                <p className="text-center text-8xl text-gray-100 ">{number}</p>
-               <p className="text-white text-4xl font-semibold " >{title}</p>
-                <p className="text-gray-200">{subtitle}</p>
+            <div className=" items-center md:px-40 flex flex-col space-y-0 ">
+                <p className="md:text-center md:text-8xl text-4xl text-gray-100 ">{number}</p>
+               <p className="text-white md:text-4xl sm:text-2xl font-semibold " >{title}</p>
+                <p className="text-gray-200 p-0 m-0">{subtitle}</p>
             </div>
     );
 }
@@ -61,11 +61,11 @@ export default function Reasons() {
   
     return (
         <div className="relative">
-            <img src={Girl} />
-            <div className="absolute bg-gray-800 bg-opacity-70 top-0 w-full h-full">
-            <p className="mt-4 ml-4 text-gray-100 text-4xl ">Reasons to join EIK</p>
+            <img src={Girl} className="h-96" />
+            <div className="absolute bg-gray-800 bg-opacity-70 top-0 w-full h-full sm:items-left">
+            <p className="md:mt-4 mt-2 md:ml-4 ml-2 text-gray-100 text-2xl md:text-4xl ">Reasons to join EIK</p>
 
-                <div className="slideshowSlider w-full h-full items-center tex-center">
+                <div className=" w-full h-full items-center text-center">
                     <ReasonItem  number={main_reasons[index].number} title={main_reasons[index].title} subtitle={main_reasons[index].description} />
                 </div>
             </div>

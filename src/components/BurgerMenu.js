@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {Link} from "react-router-dom";
 import CustomButton from './Button';
 const Header = ({ title }) =>{
@@ -37,9 +37,9 @@ const MenuItem = ({ itemText, itemArray, itemLink }) =>{
     )
 }
 
-export default function Menu({mobile}) {
+export default function BurgerMenu({visible}) {
     return (
-        <div className={` md:flex md:flex-col md:space-y-2 ${mobile ? 'fixed top-16 left-0 m-0 bg-gray-100 w-full h-full z-500':'hidden'}`}>
+        <div className={`${visible ? '':'hidden'}`} >
             <Header title="Menu"  />
             <Link to="/">
             <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">Home</p>
@@ -56,7 +56,6 @@ export default function Menu({mobile}) {
         </div>
     )
 }
-
 const LoginSnippet = () =>{
     return (
         <div>

@@ -22,7 +22,7 @@ export default function KeyLinks() {
                 </svg>
                 <p className="text-4xl text-green-700 ">Key Links</p>
                 </div>
-                <div className="flex space-x-4 items-center">
+                <div className="grid grid-cols-3 space-x-2 md:flex md:space-x-4 items-top ">
                 <LinkItem title="Academic Bridge"/>
                     
                     <LinkItem title="Blue Lotus"/>

@@ -2,9 +2,9 @@ import React from 'react'
 
 const News = ({ image,title, content }) =>{
     return (
-        <div className="grid grid-cols-4 w-full bg-white shadow-md space-x-8 mt-4">
-            <img src={image} className=" w-full"/>
-            <div className="col-span-3 mt-4 flex flex-col">
+        <div className="md:grid md:grid-cols-4 w-full bg-white shadow-md space-x-8 mt-4">
+            <img src={image} className=" w-full h-full object-cover"/>
+            <div className="md:col-span-3 mt-4 flex flex-col">
                 <p className="w-full text-gray-800 text-4xl">{title}</p>
                 <p className="mt-0 text-gray-500 mr-4">{content}</p>
             </div>

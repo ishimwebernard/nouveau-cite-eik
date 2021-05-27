@@ -11,6 +11,37 @@
   top: 50%;
   transform: translate(0, -50%);
 }
+*{
+  font-family: 'Poppins', sans-serif;
+}
 
-
-/* Slideshow */
+@media only screen and (max-width: 639px){
+    html, body{
+        font-size: 13px;
+    }
+}
+@media only screen and (min-width: 640px){
+    html, body{
+        font-size: 13px;
+    }
+}
+@media only screen and (min-width: 768px){
+    html, body{
+        font-size: 14px;
+    }
+}
+@media only screen and (min-width: 1024px){
+    html, body{
+        font-size: 14px;
+    }
+}
+@media only screen and (min-width: 1280px){
+    html, body{
+        font-size: 15px;
+    }
+}
+@media only screen and (min-width: 1536px){
+    html, body{
+        font-size: 15px;
+    }
+}

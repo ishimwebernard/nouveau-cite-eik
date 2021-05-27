@@ -10,10 +10,10 @@ export default function Extracuricular() {
     return (
         <div className="bg-gray-100">
             <Header absolute={false} />
-           <TitleImage text="Extra Curricular Activities" image={Girl}/>
+           <TitleImage text="STUDENT CLUBS" image={Girl}/>
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
-            <p className="text-6xl text-gray-800">Extracuricular Activities</p>
+            <p className="text-6xl text-gray-800">Students Clubs</p>
             <Card image={Girl} title="To provide needed material" description="The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations." />
             <Card image={Girl}  title="To prepare exams" description="The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations." />
            </div>
