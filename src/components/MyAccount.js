@@ -1,0 +1,135 @@
+import React, {useContext, useState, useEffect} from 'react'
+import axios from 'axios'
+import UserContext from './userGLobal'
+import {ToastProvider, useToasts} from 'react-toast-notifications'
+import Footer from './footer'
+import Button from './Button'
+
+const Lesson = ({lesson, lessonShifter}) =>{
+    return (
+        <div className='flex flex-col space-y-0 justify-center cursor-pointer' onClick={()=>{ lessonShifter(lesson) }}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-36 w-36 p-auto" viewBox="0 0 20 20" fill="#047857">
+  <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z" clip-rule="evenodd" />
+  <path d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z" />
+</svg>
+<p className='w-full text-xl text-gray-800 '>{lesson.title.length < 20 ? lesson.title : lesson.title.toString().substring(0,20)+'...'}</p>
+<p className='w-full text-md text-gray-400'>{lesson.dateUPloaded}</p>
+        </div>
+    )
+}
+
+
+const LessonsView = ({lessonShifter}) =>{
+    const {user} = useContext(UserContext)  ;
+    let globalUser;
+    globalUser = user;
+    if(!user){
+        globalUser=localStorage.getItem("useremail")
+    } 
+    const {addToast} = useToasts();
+    const [fullRows, setFullRows] = useState([]);
+    const rows = [];
+    useEffect(()=>{
+        const getServerData = async()=>{
+            const data = {"teacher": "user"}
+          
+            try{
+                const res = await axios(
+                    {    method: 'post',
+                         url: 'https://ecole-internationale-de-kigali.herokuapp.com/lessons/lessonbyteacher',
+                        data: {"teacher": globalUser.toString()}
+                    }
+                );
+                //console.log(res.data.data)
+                for(let lesson of res.data.data){
+                    rows.push(
+                        <Lesson lesson={lesson} lessonShifter={lessonShifter} />
+                    )
+                }
+                setFullRows(rows)
+
+                return rows;
+               // addToast(res.response.data, {appearance: "success"})
+            }catch(error){
+                error = error.response.data
+                addToast(error, {appearance: "error"})
+            }
+        }
+        getServerData()
+    }, [])
+
+    return (
+        <ToastProvider>
+           <div className='grid grid-cols-3 items-top px-8'>
+               {fullRows}
+           </div>
+        </ToastProvider>
+    )
+}
+
+const ListItem = ({title, value}) => {
+    return (
+    <div className=' grid grid-cols-2 w-full justify-center space-x-4'> 
+        <p className='text-right text-bg text-gray-500' >{title}</p>
+        <p className='text-bg'>{value}</p>
+    </div>
+    )
+}
+
+export default  function MyAccount() {
+    const {user} = useContext(UserContext)  ;
+    let globalUser;
+    globalUser = user;
+    if(!user){
+        globalUser=localStorage.getItem("useremail")
+    } 
+    const [FocusLesson, setFocusLesson] = useState({})
+
+    const shiftLesson = (lesson) =>{
+        setFocusLesson(lesson)
+        
+    }
+    
+    return (
+        <ToastProvider>
+            <div className='bg-gray-50'>
+           
+           <div className='bg-transparent grid grid-cols-3 p-2'>
+                <p className='text-xl'>EIK Upload Tool</p>
+                <div className='flex space-x-2 justify-center'>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+</svg>
+<p className='uppercase text-bold cursor-pointer'>Upload new material</p>
+                </div>
+                <div className='justify-right'>
+                <p className='text-right space-x-2 text-green-700'>{globalUser}
+                <span className='m-4'>Logout</span>
+
+                </p>
+                </div>
+            </div>
+         <div className='w-full flex '>
+            <div className='w-3/5'>
+               <LessonsView lessonShifter={shiftLesson} />
+            </div>
+            <div className='border-l border-gray-200 w-2/5 py-3 px-8'>
+                <p className='text-bold text-2xl'>{FocusLesson.title}</p>
+               <ListItem title="Subject" value={FocusLesson.subject}/>
+                <ListItem title="Target Class" value={FocusLesson.targetClass}/>
+                <ListItem title="Teachers Email" value={FocusLesson.teacher} />
+                <ListItem title="Description" value={FocusLesson.description}/>
+                <ListItem title="File" value={FocusLesson.file}/>
+                <ListItem title="Date Uploaded" value={FocusLesson.dateUPloaded}/>
+                <div className='flex space-x-4'>
+                    <Button text="Open" good={true}/>
+                    <Button text="Delete" />
+                </div>
+            </div>
+         </div>
+            
+        </div>
+        <Footer />
+        </ToastProvider>
+    )
+}

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {createContext, useState} from 'react';
+import UserContext from './userGLobal'
 import Index from './index';
 import MissionAndVision from './missionandvision'
 import { BrowserRouter as Router, Switch, Route, withRouter} from 'react-router-dom'
+import {toast, ToastContainer} from "react-toastify"
 import WhoWeAre from './whoweare';
 import DutiesOfParents from './dutiesOfParents' 
 import DutiesOfStudents from './dutiesOfStudents'
@@ -10,20 +12,24 @@ import HeadOfSchoolWelcome from './headofschoolwelcome'
 import extracuriculatactivities from './extracuricularActivities'
 import studentclubs from './studentsClub'
 import ContactUs from './contactUs'
-import Girl from '../assets/Image13.jpg';
+import schoollab from '../assets/schoollab.jpg'
+import MyAccount from './MyAccount'
+
 import NewsViewer from './newsViewer'
 import News from './news'
 const news = [
-    {title: 'Bernard gets turing award', body: 'Ohh my', image: {Girl}}
+    {title: 'Bernard gets turing award', body: 'Ohh my', image: {schoollab}}
 ]
 export default function Main() {
     var row = [];
+    const [user, setUser] = useState(null)
     for(var i = 0; i< news.length; i++){
         var route = news[i].title.toString().replaceAll(' ', '_');
         row.push(<Route exact path={route} render={NewsViewer}/>       )
     }
     return (
-        <Switch>
+        <Switch>           
+                  <UserContext.Provider value={{user, setUser}}>
                   <Route exact path="/whoweare" component={WhoWeAre}/>
                   <Route exact path="/" component={Index} />
                   <Route exact path="/missionandvision" component={MissionAndVision} />
@@ -35,12 +41,14 @@ export default function Main() {
                   <Route exact path="/studentclubs" component={studentclubs} />
                   <Route exact path="/contact" component={ContactUs} />
                   <Route exact path="/news" component={News} />
+                  <Route exact path="/myaccount" component={MyAccount}/>
                   {
                     news.forEach(()=>{
                         return <Route exact path={route} render={NewsViewer}/> 
                     })
                   }
                 {row}
+                  </UserContext.Provider>
         </Switch>
     )
 }

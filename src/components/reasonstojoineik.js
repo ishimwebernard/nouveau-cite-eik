@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Girl from '../assets/Image9.jpg';
+import schoollab from '../assets/schoollab.jpg'
+
 import { TimelineMax } from 'gsap/all';
 import Typist from 'react-typist';
 
@@ -61,7 +62,7 @@ export default function Reasons() {
   
     return (
         <div className="relative">
-            <img src={Girl} className="h-96" />
+            <img src={schoollab} className="h-96" />
             <div className="absolute bg-gray-800 bg-opacity-70 top-0 w-full h-full sm:items-left">
             <p className="md:mt-4 mt-2 md:ml-4 ml-2 text-gray-100 text-2xl md:text-4xl ">Reasons to join EIK</p>
 

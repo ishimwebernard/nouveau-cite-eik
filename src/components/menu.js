@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {Link} from "react-router-dom";
 import CustomButton from './Button';
+import axios from 'axios'
+import { useToasts } from 'react-toast-notifications';
+import { useHistory, Redirect } from "react-router-dom";
+import UserContext from './userGLobal'
+
+
+
 const Header = ({ title }) =>{
     return (
         <div className="px-6 bg-green-700">
@@ -37,7 +44,7 @@ const MenuItem = ({ itemText, itemArray, itemLink }) =>{
     )
 }
 
-export default function Menu({mobile}) {
+export default function Menu({mobile, loginErrorFunction}) {
     return (
         <div className={` md:flex md:flex-col md:space-y-2 ${mobile ? 'fixed top-16 left-0 m-0 bg-gray-100 w-full h-full z-500':'hidden'}`}>
             <Header title="Menu"  />
@@ -52,17 +59,67 @@ export default function Menu({mobile}) {
             <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">Contact Us</p>
             </Link>
             <Header title="Login"/>
-            <LoginSnippet />
+            <LoginSnippet loginErrorFunction={loginErrorFunction}/>
         </div>
     )
+}
+const LoginUser = async(email, password) =>{
+    const data = {
+        "email": email,
+        "password": password
+    }
+    try{
+    const res = await axios(
+        {   method: 'post',
+            url: 'https://ecole-internationale-de-kigali.herokuapp.com/users/login',
+            data
+        }
+    );
+   
+    return {email: email}
+}catch(error){
+    return {error: error.response.data.data}
+}
 }
 
 const LoginSnippet = () =>{
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [loginorloading, setLoginorLoading] = useState('Login')
+    const { addToast } = useToasts();
+    const {user, setUser} = useContext(UserContext)
+    let history = useHistory(); 
+
     return (
         <div>
-            <input className="transparent bg-transparent p-2 w-full border-2 rounded-md border-green-700 focus:outline-none" placeholder="Enter your email"/>
-            <input className="transparent mt-2 bg-transparent p-2 w-full border-2 rounded-md border-green-700 focus:outline-none" type="password" placeholder="Enter your password"/>
-            <CustomButton text="Login" good={true} />
+            <input className="transparent bg-transparent p-2 w-full border-2 rounded-md border-green-700 focus:outline-none" placeholder="Enter your email" onChange={(e)=>{
+                setEmail(e.target.value)
+            }}/>
+            <input className="transparent mt-2 bg-transparent p-2 w-full border-2 rounded-md border-green-700 focus:outline-none" type="password" placeholder="Enter your password"
+            onChange={(e)=>{
+                setPassword(e.target.value)
+            }}
+            />
+            <div onClick={async()=>{
+
+                setLoginorLoading('Loading ...')
+                const response = await LoginUser(email, password);
+                setLoginorLoading('Login')
+                if(response.error){
+                    return addToast(response.error, {appearance: "error"})
+                }else if(response.email !== undefined){
+                    const email = response.email.toString();
+                    setUser(email) 
+                    localStorage.setItem("useremail", email);
+                    history.push('/myaccount')
+
+                }
+            }}>
+            <CustomButton text={loginorloading} good={true} />
+            </div>
         </div>
     )
 }
+/**
+ * 
+ */

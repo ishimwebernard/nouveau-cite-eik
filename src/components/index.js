@@ -1,3 +1,4 @@
+import {ToastProvider, useToasts} from "react-toast-notifications"
 import React, { useState } from 'react';
 import Header from './header';
 import SlideShow from './slideshow';
@@ -6,11 +7,24 @@ import Reasons from './reasonstojoineik'
 import News from './recentNews'
 import KeyLinks from './keyLinks'
 import Footer from './footer'
+import axios from "axios"
+
+const loginUser = async(email, password) =>{
+    const res = await axios.get('https://ecole-internationale-de-kigali.herokuapp.com/users/login', {
+        data: {
+            "email": email,
+            "password": password
+        }
+  
+      });
+      return res.data.data;
+}
 
 export default function Main() {
     const [mobile, setMobile] = useState(false);
     return (
-        <div className="bg-gray-100 flex flex-col">
+       <ToastProvider>
+            <div className="bg-gray-100 flex flex-col">
             <Header absolute={false} onBurgerClicked={()=>{
                 setMobile(!mobile);
             }}/>
@@ -21,10 +35,15 @@ export default function Main() {
                     <News />
                     <KeyLinks />
                 </div>
-                <Menu mobile={mobile} />
+                <Menu mobile={mobile} loginErrorFunction={(error)=>{
+                    //     const { addToast } = useToasts();
+
+                    // addToast(error, {appearance: 'error'})
+                }}/>
             </div>
             <Footer />
 
         </div>
+       </ToastProvider>
     )
 }

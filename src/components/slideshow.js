@@ -1,7 +1,10 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap';
-import girl from '../assets/Image13.jpg'
-import school from '../assets/Image9.jpg'
+import basketball from '../assets/basketball.jpg'
+import focusgirl from '../assets/focusgirl.jpg'
+import learningboy from '../assets/learningboy.jpg'
+import schoollab from '../assets/schoollab.jpg'
+import '../carousel.css'
 
 export default function SlideShow() {
     return (
@@ -11,8 +14,8 @@ export default function SlideShow() {
             <Carousel>
   <Carousel.Item>
     <img
-      className="image-caroussel-size w-100 "
-      src={girl}
+      className="image-caroussel-size w-100 resize-carousel"
+      src={learningboy}
       alt="First slide"
     />
     <Carousel.Caption>
@@ -22,8 +25,32 @@ export default function SlideShow() {
   </Carousel.Item>
   <Carousel.Item>
     <img
-      className="image-caroussel-size w-100"
-      src={school}
+      className="image-caroussel-size w-100 resize-carousel"
+      src={learningboy}
+      alt="Second slide"
+    />
+
+    <Carousel.Caption>
+      <h3>Start you journey</h3>
+      <p>Join EIK today</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="image-caroussel-size w-100 resize-carousel"
+      src={focusgirl}
+      alt="Second slide"
+    />
+
+    <Carousel.Caption>
+      <h3>Start you journey</h3>
+      <p>Join EIK today</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className=" w-full resize-carousel"
+      src={schoollab}
       alt="Second slide"
     />
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import TitleImage from './titleimage';
-import Girl from '../assets/Image13.jpg';
+import schoollab from '../assets/schoollab.jpg'
+
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
@@ -9,7 +10,7 @@ export default function HeadOfSchoolWelcome() {
     return (
         <div className="bg-gray-100">
             <Header absolute={false} />
-           <TitleImage text="Head of school's welcome" image={Girl}/>
+           <TitleImage text="Head of school's welcome" image={schoollab}/>
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2 ">
            <div className="grid grid-cols-2 h-56">

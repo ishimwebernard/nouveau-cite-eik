@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import TitleImage from './titleimage';
-import Girl from '../assets/Image13.jpg';
+import schoollab from '../assets/schoollab.jpg'
+
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
@@ -22,7 +23,7 @@ export default function ContactUs() {
             }}  />
                         <BurgerMenu visible={burgerVisible}/>
 
-           <TitleImage text="CONTACT" image={Girl}/>
+           <TitleImage text="CONTACT" image={schoollab}/>
            <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4 ">
            <div className="col-span-2">
             <p className="text-6xl text-gray-800">Contact Us</p>

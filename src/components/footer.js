@@ -18,7 +18,7 @@ const FooterList = ({title, links}) => {
 export default function Footer() {
     return (
        <div className=" bg-green-700">
-            <div className=" md:flex-row px-4 py-4 items-top text-left md:space-x-20 ">
+            <div className=" md:flex px-4 py-4 items-top text-left md:space-x-20 ">
             <FooterList title="Address" links={["KN 180 ST", "+245345634", "info@spam.gmai"]}/>
             <FooterList title="Quick Menu" links={["Home", "About", "School Organization"]}/>
             <FooterList title="Learning" links={["Primary School", "Nursery School"]}/>

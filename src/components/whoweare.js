@@ -1,6 +1,7 @@
 import React from 'react'
 import TitleImage from './titleimage';
-import Girl from '../assets/Image13.jpg';
+import schoollab from '../assets/schoollab.jpg'
+
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
@@ -9,7 +10,7 @@ export default function WhoWeAre() {
     return (
         <div className="bg-gray-100">
             <Header absolute={false} />
-           <TitleImage text="WHO WE ARE" image={Girl}/>
+           <TitleImage text="WHO WE ARE" image={schoollab}/>
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
             <p className="text-6xl text-gray-800">Who we are</p>
