@@ -4,6 +4,30 @@ import UserContext from './userGLobal'
 import {ToastProvider, useToasts} from 'react-toast-notifications'
 import Footer from './footer'
 import Button from './Button'
+import {firebase} from '@firebase/app'
+import env from 'react-dotenv'
+import uuid from 'react-uuid'
+
+const firebaseConfig = {
+    apiKey: env.REACT_APP_apiKey,
+    authDomain: env.REACT_APP_authDomain,
+    projectId: env.REACT_APP_projectId,
+    storageBucket: env.REACT_APP_storageBucket,
+    messagingSenderId: env.REACT_APP_messagingSenderId,
+    appId: env.REACT_APP_appId,
+    measurementId: env.REACT_APP_measurementId
+  }
+  firebase.initializeApp(firebaseConfig)
+
+const InputText = ({ placeHolder, onChange }) =>{
+    return (
+        <div className='py-2'>
+            <input className='w-full border-1 border-gray-700 p-1 shadow-sm focus:outline-none' placeholder={placeHolder}   />
+        </div>
+    )
+}
+
+
 
 const Lesson = ({lesson, lessonShifter}) =>{
     return (
@@ -80,27 +104,72 @@ export default  function MyAccount() {
     const {user} = useContext(UserContext)  ;
     let globalUser;
     globalUser = user;
+console.log(env.REACT_APP_appId)
+
     if(!user){
         globalUser=localStorage.getItem("useremail")
     } 
     const [FocusLesson, setFocusLesson] = useState({})
+    const [AddLessonActive, setAddLessonActive] = useState(false);
 
     const shiftLesson = (lesson) =>{
         setFocusLesson(lesson)
         
     }
+    const AddLesson = () =>{
+        setAddLessonActive(!AddLessonActive)
+    }
+    function LessonAdder({ visible, onOpen}) {
+        console.log('initials: ', visible)
+        return (
+            <div className={`${ visible ? 'fixed':'hidden'}  fixed h-full w-full bg-gray-700 bg-opacity-50 justify-center`}>
+               <div className='m-auto bg-gray-50 w-3/4 h-4/5 mt-10 px-8 py-4 rounded-lg' >
+               <p className='font-semibold text-2xl flex flex-col space-y-2' >Upload New Lesson</p>
+               <InputText placeHolder="Subject" />
+               <select onChange={(e)=>{
+                   console.log(e.target.value)
+               }}>
+                   <option value='p1'>Primary 1</option>
+                   <option value='p2'>Primary 2</option>
+                   <option value='p3'>Primary 3</option>
+                   <option value='p4'>Primary 4</option>
+                   <option value='p5'>Primary 5</option>
+                   <option value='p6'>Primary 6</option>
+               </select>
+               <InputText placeHolder="Title" />
+               <InputText placeHolder="Teacher" />
+                <textarea className='w-full h-40 shadow-sm focus:outline-none p-1' placeholder='Description'  />
+                <input type='file' onChange={(e)=>{
+                    console.log(e.target)
+                }} />
+                <div className='flex space-x-4 w-full' >
+                    <Button text='Upload' good={true}/>
+                    <div onClick={()=>{
+    
+                        onOpen()
+                        }}>
+                    <Button text='Cancel' good={false}   />
+                    </div>
+                </div>
+               </div>
+            </div>
+        )
+    }
+    
     
     return (
         <ToastProvider>
             <div className='bg-gray-50'>
-           
+           <LessonAdder visible={AddLessonActive} onOpen={AddLesson} />
            <div className='bg-transparent grid grid-cols-3 p-2'>
                 <p className='text-xl'>EIK Upload Tool</p>
                 <div className='flex space-x-2 justify-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
 </svg>
-<p className='uppercase text-bold cursor-pointer'>Upload new material</p>
+<p className='uppercase text-bold cursor-pointer' onClick={()=>{
+    setAddLessonActive(!AddLessonActive)
+}} >Upload new material</p>
                 </div>
                 <div className='justify-right'>
                 <p className='text-right space-x-2 text-green-700'>{globalUser}
@@ -123,7 +192,7 @@ export default  function MyAccount() {
                 <ListItem title="Date Uploaded" value={FocusLesson.dateUPloaded}/>
                 <div className='flex space-x-4'>
                     <Button text="Open" good={true}/>
-                    <Button text="Delete" />
+                    <Button text="Delete"  />
                 </div>
             </div>
          </div>
