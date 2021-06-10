@@ -7,22 +7,25 @@ import Button from './Button'
 import {firebase} from '@firebase/app'
 import env from 'react-dotenv'
 import uuid from 'react-uuid'
+import '@firebase/storage'
 
 const firebaseConfig = {
-    apiKey: env.REACT_APP_apiKey,
-    authDomain: env.REACT_APP_authDomain,
-    projectId: env.REACT_APP_projectId,
-    storageBucket: env.REACT_APP_storageBucket,
-    messagingSenderId: env.REACT_APP_messagingSenderId,
-    appId: env.REACT_APP_appId,
-    measurementId: env.REACT_APP_measurementId
+    apiKey: "AIzaSyBLtbU8MWi_BHunfQ7b4a6JPad0Jdmeh9E",
+    authDomain: "ecole-internationale-dekigli.firebaseapp.com",
+    projectId: "ecole-internationale-dekigli",
+    storageBucket: "ecole-internationale-dekigli.appspot.com",
+    messagingSenderId: "669208960466",
+    appId: "1:669208960466:web:07897e417b95a689cb3c0b",
+    measurementId: "G-9EKFKSTZPN"
   }
   firebase.initializeApp(firebaseConfig)
 
 const InputText = ({ placeHolder, onChange }) =>{
     return (
         <div className='py-2'>
-            <input className='w-full border-1 border-gray-700 p-1 shadow-sm focus:outline-none' placeholder={placeHolder}   />
+            <input className='w-full border-1 border-gray-700 p-1 shadow-sm focus:outline-none' placeholder={placeHolder} onChange={(e)=>{
+                onChange(e)
+            }}   />
         </div>
     )
 }
@@ -104,6 +107,7 @@ export default  function MyAccount() {
     const {user} = useContext(UserContext)  ;
     let globalUser;
     globalUser = user;
+
 console.log(env.REACT_APP_appId)
 
     if(!user){
@@ -111,6 +115,33 @@ console.log(env.REACT_APP_appId)
     } 
     const [FocusLesson, setFocusLesson] = useState({})
     const [AddLessonActive, setAddLessonActive] = useState(false);
+    let file
+    let description
+    let teacher
+    let targetClass
+    let userId
+    let subject;
+    let title;
+    const changeSubject = (newSUbject) =>{
+        subject = newSUbject;
+        console.log(subject) 
+    }
+    const setLessonFile = (newFIle) =>{
+        file = newFIle
+    }
+    const setteacher = (newteacher) =>{
+        teacher = newteacher
+    }
+    const settargetClass = (newtargetClass) =>{
+        targetClass = newtargetClass;
+        console.log(subject) 
+    }
+    const setdescription = (newdescription) =>{
+        description = newdescription
+    }
+    const settitle = (newtitle) =>{
+        title = newtitle
+    }
 
     const shiftLesson = (lesson) =>{
         setFocusLesson(lesson)
@@ -119,15 +150,56 @@ console.log(env.REACT_APP_appId)
     const AddLesson = () =>{
         setAddLessonActive(!AddLessonActive)
     }
+    const uploadLesson = async(data) =>{
+        try{
+            const res = await axios({
+                method: 'post',
+                url: 'https://ecole-internationale-de-kigali.herokuapp.com/lessons/',
+                data
+            })
+           
+            return {error: null, message: res.response}
+        }catch(error){
+            return {error: error, message: null}
+        }
+    }
+    const Upld = () =>{
+        const {addToast} = useToasts(); 
+
+        return (
+            <div onClick={async()=>{
+                alert('Clicked')
+                const userStorageRef = firebase.storage().ref().child(uuid());
+                userStorageRef.put(file).then((snapshot)=>{
+                    const fileDirectory = snapshot.ref.getDownloadURL().then(async(url)=>{
+                        let toUPload = {
+                            description,title,file:url,targetClass,teacher:globalUser, userId:globalUser
+                        }
+                        const rs = await uploadLesson(toUPload);
+                        console.log(rs)
+                 
+                    })
+                })
+                
+            }}>
+            <Button text='Upload' good={true}/>
+            </div>
+        )
+    }
     function LessonAdder({ visible, onOpen}) {
         console.log('initials: ', visible)
         return (
             <div className={`${ visible ? 'fixed':'hidden'}  fixed h-full w-full bg-gray-700 bg-opacity-50 justify-center`}>
+   
                <div className='m-auto bg-gray-50 w-3/4 h-4/5 mt-10 px-8 py-4 rounded-lg' >
                <p className='font-semibold text-2xl flex flex-col space-y-2' >Upload New Lesson</p>
-               <InputText placeHolder="Subject" />
+               <InputText placeHolder="Subject" onChange={(e)=>{
+                   //console.log(e.target.value)
+                   changeSubject(e.target.value)
+               }} /> 
                <select onChange={(e)=>{
                    console.log(e.target.value)
+                   settargetClass(e.target.value)
                }}>
                    <option value='p1'>Primary 1</option>
                    <option value='p2'>Primary 2</option>
@@ -136,16 +208,23 @@ console.log(env.REACT_APP_appId)
                    <option value='p5'>Primary 5</option>
                    <option value='p6'>Primary 6</option>
                </select>
-               <InputText placeHolder="Title" />
-               <InputText placeHolder="Teacher" />
-                <textarea className='w-full h-40 shadow-sm focus:outline-none p-1' placeholder='Description'  />
+               <InputText placeHolder="Title" onChange={(e)=>{
+                   settitle(e.target.value)
+               }}/>
+               <InputText placeHolder="Teacher" onChange={(e)=>{
+                   setteacher(e.target.value)
+               }} />
+                <textarea className='w-full h-40 shadow-sm focus:outline-none p-1' placeholder='Description' onChange={(e)=>{
+                    setdescription(e.target.value)
+                }} />
                 <input type='file' onChange={(e)=>{
-                    console.log(e.target)
+                    console.log(e.target.files)
+                    setLessonFile(e.target.files[0])
                 }} />
                 <div className='flex space-x-4 w-full' >
-                    <Button text='Upload' good={true}/>
+                    <Upld />
                     <div onClick={()=>{
-    
+                        
                         onOpen()
                         }}>
                     <Button text='Cancel' good={false}   />
