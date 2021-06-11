@@ -1,4 +1,5 @@
 import React from 'react'
+import {ToastProvider, useToasts} from "react-toast-notifications"
 
 const News = ({ image,title, content }) =>{
     return (
@@ -13,7 +14,9 @@ const News = ({ image,title, content }) =>{
 }
 
 export default function RecentNews() {
-    return (
+    window.scrollTo(0, 0)
+
+    return (<ToastProvider>
         <div>
             <div className="flex space-x-2 mt-4 ml-4">
                 
@@ -25,6 +28,6 @@ export default function RecentNews() {
             </div>
             <News content="Learning helps one develop passion and enables one to find his her carrier Learning helps one develop passion and enables one to find his her carrier" title="Learning is good for everyone" image="https://images.unsplash.com/photo-1557862921-37829c790f19?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"/>
             <News content="Learning helps one develop passion and enables one to find his her carrier Learning helps one develop passion and enables one to find his her carrier" title="Learning is good for everyone" image="https://images.unsplash.com/photo-1557862921-37829c790f19?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"/>
-        </div>
+        </div></ToastProvider>
     )
 }

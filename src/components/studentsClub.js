@@ -1,6 +1,7 @@
 import React from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
+import {ToastProvider, useToasts} from "react-toast-notifications"
 
 import Header from './header';
 import Menu from './menu';
@@ -8,7 +9,9 @@ import Footer from './footer'
 import BigCard from './bigCard'
 
 export default function Extracuricular() {
-    return (
+    window.scrollTo(0, 0)
+
+    return (<ToastProvider>
         <div className="bg-gray-100">
             <Header absolute={false} />
            <TitleImage text="STUDENT CLUBS" image={schoollab}/>
@@ -21,7 +24,7 @@ export default function Extracuricular() {
                 <Menu />
            </div>
            <Footer />
-        </div>
+        </div></ToastProvider>
     )
 }
 

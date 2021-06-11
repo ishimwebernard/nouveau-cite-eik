@@ -1,14 +1,17 @@
 import React from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
+import {ToastProvider, useToasts} from "react-toast-notifications"
 
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
 import BigCard from './bigCard'
 
-export default function DutiesOfParents() {
-    return (
+export default function DutiesOfParents() {    
+    window.scrollTo(0, 0)
+
+    return (<ToastProvider>
         <div className="bg-gray-100">
             <Header absolute={false} />
            <TitleImage text="DUTIES OF PARENTS" image={schoollab}/>
@@ -24,6 +27,7 @@ export default function DutiesOfParents() {
            </div>
            <Footer />
         </div>
+        </ToastProvider>
     )
 }
 

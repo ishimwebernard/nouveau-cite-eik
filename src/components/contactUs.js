@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
+import {ToastProvider, useToasts} from "react-toast-notifications"
 
 import Header from './header';
 import Menu from './menu';
@@ -15,7 +16,9 @@ export default function ContactUs() {
     const changeBurgerVisibility = () =>{
         setBurgerVisible(!burgerVisible)
     }
-    return (
+    window.scrollTo(0, 0)
+
+    return (<ToastProvider>
         <div className="bg-gray-100">
             <Header absolute={false} onBurgerClicked={()=>{
                changeBurgerVisibility();
@@ -64,7 +67,7 @@ export default function ContactUs() {
                 <Menu />
            </div>
            <Footer />
-        </div>
+        </div></ToastProvider>
     )
 }
 

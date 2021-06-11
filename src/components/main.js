@@ -14,7 +14,7 @@ import studentclubs from './studentsClub'
 import ContactUs from './contactUs'
 import schoollab from '../assets/schoollab.jpg'
 import MyAccount from './MyAccount'
-
+import StudentAccount from './student'
 import NewsViewer from './newsViewer'
 import News from './news'
 const news = [
@@ -27,6 +27,8 @@ export default function Main() {
         var route = news[i].title.toString().replaceAll(' ', '_');
         row.push(<Route exact path={route} render={NewsViewer}/>       )
     }
+
+
     return (
         <Switch>           
                   <UserContext.Provider value={{user, setUser}}>
@@ -41,6 +43,7 @@ export default function Main() {
                   <Route exact path="/studentclubs" component={studentclubs} />
                   <Route exact path="/contact" component={ContactUs} />
                   <Route exact path="/news" component={News} />
+                  <Route exact path="/student" component={StudentAccount}/>
                   <Route exact path="/myaccount" component={MyAccount}/>
                   {
                     news.forEach(()=>{

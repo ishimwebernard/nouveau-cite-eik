@@ -1,13 +1,16 @@
 import React from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
+import {ToastProvider, useToasts} from "react-toast-notifications"
 
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
 
 export default function WhoWeAre() {
-    return (
+    window.scrollTo(0, 0)
+
+    return (<ToastProvider>
         <div className="bg-gray-100">
             <Header absolute={false} />
            <TitleImage text="WHO WE ARE" image={schoollab}/>
@@ -22,6 +25,6 @@ This is why some parents with experience and concern for education came together
                 <Menu />
            </div>
            <Footer />
-        </div>
+        </div></ToastProvider>
     )
 }

@@ -16,6 +16,7 @@ const Header = ({ title }) =>{
     )
 }
 
+
 const MenuItem = ({ itemText, itemArray, itemLink }) =>{
     const [expanded, setExpanded] = useState(false);
     const [redundant, setRedundant] = useState(false);
@@ -43,6 +44,55 @@ const MenuItem = ({ itemText, itemArray, itemLink }) =>{
         </div>
     )
 }
+const loginStudent = async(code) =>{
+    try{
+        const res = await axios({
+            method: 'post',
+            url: 'https://ecole-internationale-de-kigali.herokuapp.com/users/student',
+            data: {code}
+        })
+        return res.data
+    }catch(error){
+        return {
+            error: error.response.data
+        }
+    }
+}
+const StudentLogin = () =>{
+    const [classCOde, setClassCode] = useState();
+    const [textbutton, setButtonText] = useState();
+    const { addToast } = useToasts();
+    const history = useHistory()
+
+    return (
+        <div>
+            <input className="transparent mt-2 bg-transparent p-2 w-full border-2 rounded-md border-green-700 focus:outline-none" type="text/plain" placeholder="Enter your class code"
+        onChange={(e)=>{
+           setClassCode(e.target.value)
+           console.log(classCOde)
+        }}
+        />
+                   <div onClick={async()=>{
+                       const res = await loginStudent(classCOde)
+                       if(res.error){
+                        addToast(res.error.data, {appearance: 'error'})
+                       }else{
+                        addToast('Authorized', {appearance: 'success'})
+                        setTimeout(()=>{
+                            localStorage.setItem('studentclass',res.data)
+                            
+
+                        history.push('/student')
+                        window.location.reload();
+                        }, 1000)
+                       }
+                   }} >
+                   <CustomButton text='Login' good={true} />
+                   </div>
+
+        </div>
+    )
+}
 
 export default function Menu({mobile, loginErrorFunction}) {
     return (
@@ -58,8 +108,12 @@ export default function Menu({mobile, loginErrorFunction}) {
               <Link to="/contact">
             <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">Contact Us</p>
             </Link>
-            <Header title="Login"/>
+            <Header title="Student Login"/>
+           <StudentLogin />
+            <div className='py-4' >
+            <Header title="Teachers Login"/>
             <LoginSnippet loginErrorFunction={loginErrorFunction}/>
+            </div>
         </div>
     )
 }
@@ -112,7 +166,7 @@ const LoginSnippet = () =>{
                     setUser(email) 
                     localStorage.setItem("useremail", email);
                     history.push('/myaccount')
-
+                    window.location.reload();
                 }
             }}>
             <CustomButton text={loginorloading} good={true} />

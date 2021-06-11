@@ -23,7 +23,7 @@ const firebaseConfig = {
 const InputText = ({ placeHolder, onChange }) =>{
     return (
         <div className='py-2'>
-            <input className='w-full border-1 border-gray-700 p-1 shadow-sm focus:outline-none' placeholder={placeHolder} onChange={(e)=>{
+            <input className='w-full border-1 border-gray-700 p-1 shadow-sm focus:outline-none' placeholder={placeHolder} required onChange={(e)=>{
                 onChange(e)
             }}   />
         </div>
@@ -84,6 +84,7 @@ const LessonsView = ({lessonShifter}) =>{
         }
         getServerData()
     }, [])
+    window.scrollTo(0, 0)
 
     return (
         <ToastProvider>
@@ -96,9 +97,9 @@ const LessonsView = ({lessonShifter}) =>{
 
 const ListItem = ({title, value}) => {
     return (
-    <div className=' grid grid-cols-2 w-full justify-center space-x-4'> 
+    <div className=' grid grid-cols-2 w-full justify-center space-x-4 w-full'> 
         <p className='text-right text-bg text-gray-500' >{title}</p>
-        <p className='text-bg'>{value}</p>
+        <p className='text-bg w-full flex-wrap'>{value}</p>
     </div>
     )
 }
@@ -157,10 +158,10 @@ console.log(env.REACT_APP_appId)
                 url: 'https://ecole-internationale-de-kigali.herokuapp.com/lessons/',
                 data
             })
-           
-            return {error: null, message: res.response}
+            console.log(res)
+            return {error: null, message: res.data.message}
         }catch(error){
-            return {error: error, message: null}
+            return {error: error.response.data.data, message: null}
         }
     }
     const Upld = () =>{
@@ -172,11 +173,22 @@ console.log(env.REACT_APP_appId)
                 const userStorageRef = firebase.storage().ref().child(uuid());
                 userStorageRef.put(file).then((snapshot)=>{
                     const fileDirectory = snapshot.ref.getDownloadURL().then(async(url)=>{
+                        console.log('done')
+                        console.log(url)
                         let toUPload = {
-                            description,title,file:url,targetClass,teacher:globalUser, userId:globalUser
+                            description,title,file:url,targetClass,teacher:globalUser, userId:globalUser, subject
                         }
+                        console.log(toUPload)
                         const rs = await uploadLesson(toUPload);
-                        console.log(rs)
+                        if(rs.error){
+                            addToast(rs.error, {appearance: 'error'})
+                        }else{
+                            addToast(rs.message, {appearance: 'success'})
+                            setTimeout(()=>{
+                                window.location.reload();
+
+                            }, 3000)
+                        }
                  
                     })
                 })
@@ -186,10 +198,10 @@ console.log(env.REACT_APP_appId)
             </div>
         )
     }
-    function LessonAdder({ visible, onOpen}) {
+    function LessonAdder({ visible, onOpen, loading}) {
         console.log('initials: ', visible)
         return (
-            <div className={`${ visible ? 'fixed':'hidden'}  fixed h-full w-full bg-gray-700 bg-opacity-50 justify-center`}>
+            <div className={`${ visible ? 'fixed':'hidden'} ${loading ? 'opacity-50':''}  fixed h-full w-full bg-gray-700 bg-opacity-50 justify-center`}>
    
                <div className='m-auto bg-gray-50 w-3/4 h-4/5 mt-10 px-8 py-4 rounded-lg' >
                <p className='font-semibold text-2xl flex flex-col space-y-2' >Upload New Lesson</p>
@@ -234,6 +246,29 @@ console.log(env.REACT_APP_appId)
             </div>
         )
     }
+
+    const DeleteButton = () =>{
+        const {addToast} = useToasts(); 
+        return (
+            <div onClick={async()=>{
+                console.log(FocusLesson.docUUID)
+                const res = await axios(
+                    {
+                        method: 'post',
+                        url: 'https://ecole-internationale-de-kigali.herokuapp.com/lessons/removelesson',
+                        data: {doc: FocusLesson.docUUID}
+                    }
+                )
+                addToast('Lesson deleted succesfully', {appearance: 'success'})
+                setTimeout(()=>{
+                    window.location.reload();
+
+                }, 3000)
+            }} >
+            <Button text="Delete"  />
+            </div>
+        )
+    }
     
     
     return (
@@ -270,8 +305,12 @@ console.log(env.REACT_APP_appId)
                 <ListItem title="File" value={FocusLesson.file}/>
                 <ListItem title="Date Uploaded" value={FocusLesson.dateUPloaded}/>
                 <div className='flex space-x-4'>
+                    <div onClick={()=>{
+                        window.open(FocusLesson.file, '_blank')
+                    }}>
                     <Button text="Open" good={true}/>
-                    <Button text="Delete"  />
+                    </div>
+                    <DeleteButton />
                 </div>
             </div>
          </div>
