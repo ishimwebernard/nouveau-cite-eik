@@ -4,6 +4,7 @@ import UserContext from './userGLobal'
 import {ToastProvider, useToasts} from 'react-toast-notifications'
 import Footer from './footer'
 import Button from './Button'
+import Loader from "react-loader-spinner";
 
   let globalUser = localStorage.getItem('studentclass');
  
@@ -29,7 +30,14 @@ const LessonsView = ({lessonShifter}) =>{
 
     const {addToast} = useToasts();
     const [studentClass, setStudentClass] = useState([]);
-    const [fullRows, setFullRows] = useState([]);
+    const [fullRows, setFullRows] = useState(
+        <div>
+        <p className='text-center m-auto text-green-700 flex font-bold text-2xl ' >
+          <Loader type="TailSpin" color="#047857" height={80} width={80} />
+          Loading
+          </p>
+   </div>
+    );
 
     const rows = [];
     console.log(globalUser)
@@ -46,14 +54,22 @@ const LessonsView = ({lessonShifter}) =>{
                     }
                 );
                 if(res.data.data.length ==0){
-
+                    
+                        setFullRows(
+                            <div className='text-center'>
+                                <p className='text-center w-full text-2xl text-green-700'>
+                                You have no study materials yet!
+                                </p>
+                            </div>
+                        )
+                
                 }else{
                     for(let lesson of res.data.data){
                         rows.push(
                             <Lesson lesson={lesson} lessonShifter={lessonShifter} />
                         )
                     }
-                    setFullRows(rows)
+                  
                 }
             }catch(error){
                 addToast('SOmething went wrong', {appearance: "error"})
@@ -92,7 +108,7 @@ export default  function Student() {
     
     return (
         <ToastProvider>
-            <div className='bg-gray-50'>
+            <div className='bg-gray-50 h-screen'>
            <div className='bg-transparent grid grid-cols-3 p-2'>
                 <p className='text-xl'>EIK Upload Tool</p>
                 <div className='flex space-x-2 justify-center'>
@@ -131,7 +147,6 @@ export default  function Student() {
          </div>
             
         </div>
-        <Footer /> 
         </ToastProvider>
     )
 }

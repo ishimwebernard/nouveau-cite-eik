@@ -30,7 +30,7 @@ export default function Main() {
 
 
     return (
-        <Switch>           
+        <Switch className='w-full h-full'>           
                   <UserContext.Provider value={{user, setUser}}>
                   <Route exact path="/whoweare" component={WhoWeAre}/>
                   <Route exact path="/" component={Index} />

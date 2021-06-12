@@ -60,6 +60,8 @@ const loginStudent = async(code) =>{
 }
 const StudentLogin = () =>{
     const [classCOde, setClassCode] = useState();
+    const [loadingText, setLoadingText] = useState('Login')
+    const [loadingBool, setLoadingBool] = useState(false)
     const [textbutton, setButtonText] = useState();
     const { addToast } = useToasts();
     const history = useHistory()
@@ -73,21 +75,25 @@ const StudentLogin = () =>{
         }}
         />
                    <div onClick={async()=>{
+                       setLoadingBool(true)
+                       setLoadingText('Loading...')
                        const res = await loginStudent(classCOde)
                        if(res.error){
                         addToast(res.error.data, {appearance: 'error'})
+                        setLoadingBool(false)
+                        setLoadingText('Login')
                        }else{
                         addToast('Authorized', {appearance: 'success'})
                         setTimeout(()=>{
                             localStorage.setItem('studentclass',res.data)
                             
-
+                            setLoadingBool(false)
                         history.push('/student')
                         window.location.reload();
                         }, 1000)
                        }
                    }} >
-                   <CustomButton text='Login' good={true} />
+                   <CustomButton text={loadingText} good={true} loading={loadingBool} />
                    </div>
 
         </div>
@@ -140,6 +146,7 @@ const LoginSnippet = () =>{
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [loginorloading, setLoginorLoading] = useState('Login')
+    const [loginBool, setLOadingBool] = useState(false)
     const { addToast } = useToasts();
     const {user, setUser} = useContext(UserContext)
     let history = useHistory(); 
@@ -157,8 +164,10 @@ const LoginSnippet = () =>{
             <div onClick={async()=>{
 
                 setLoginorLoading('Loading ...')
+                setLOadingBool(true)
                 const response = await LoginUser(email, password);
                 setLoginorLoading('Login')
+                setLOadingBool(false)
                 if(response.error){
                     return addToast(response.error, {appearance: "error"})
                 }else if(response.email !== undefined){
@@ -169,7 +178,7 @@ const LoginSnippet = () =>{
                     window.location.reload();
                 }
             }}>
-            <CustomButton text={loginorloading} good={true} />
+            <CustomButton text={loginorloading} good={true} loading={loginBool}/>
             </div>
         </div>
     )

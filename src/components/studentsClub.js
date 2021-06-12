@@ -30,14 +30,14 @@ export default function Extracuricular() {
 
 const Card = ({ image,title, description }) =>{
     return (
-        <div className=" mt-8 mb-4 h-60 grid grid-cols-2 items-top ">
-    <img src={image} className=" w-full h-full object-cover"/>
-    <div className=" top-0 left-0 h-full w-full">
-        <div className=" bottom-0 px-2">
-            <p className="text-4xl text-gray-800 font-bold">{title}</p>
-        <p className=" text-gray-600">{description}</p>
+        <div className=" mb-4  grid grid-cols-2 items-top py-4">
+        <img src={image} className=" w-full object-cover rounded-md"/>
+        <div className=" top-0 left-0 h-full w-full">
+            <div className=" bottom-0 px-2">
+                <p className="text-4xl text-gray-800 font-bold">{title}</p>
+            <p className=" text-gray-600">{description}</p>
+            </div>
         </div>
-    </div>
-        </div>
+            </div>
     )
     }

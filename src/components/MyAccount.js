@@ -8,7 +8,7 @@ import {firebase} from '@firebase/app'
 import env from 'react-dotenv'
 import uuid from 'react-uuid'
 import '@firebase/storage'
-
+import Loader from "react-loader-spinner";
 const firebaseConfig = {
     apiKey: "AIzaSyBLtbU8MWi_BHunfQ7b4a6JPad0Jdmeh9E",
     authDomain: "ecole-internationale-dekigli.firebaseapp.com",
@@ -54,7 +54,14 @@ const LessonsView = ({lessonShifter}) =>{
         globalUser=localStorage.getItem("useremail")
     } 
     const {addToast} = useToasts();
-    const [fullRows, setFullRows] = useState([]);
+    const [fullRows, setFullRows] = useState(
+        <div>
+             <p className='text-center m-auto text-green-700 flex font-bold text-2xl ' >
+               <Loader type="TailSpin" color="#047857" height={80} width={80} />
+               Loading
+               </p>
+        </div>
+    );
     const rows = [];
     useEffect(()=>{
         const getServerData = async()=>{
@@ -73,7 +80,17 @@ const LessonsView = ({lessonShifter}) =>{
                         <Lesson lesson={lesson} lessonShifter={lessonShifter} />
                     )
                 }
-                setFullRows(rows)
+                if(rows.length === 0){
+                    setFullRows(
+                        <div className='text-center'>
+                            <p className='text-center w-full text-2xl text-green-700'>
+                            No lessons uploaded yet!
+                            </p>
+                        </div>
+                    )
+                }else{
+                    setFullRows(rows)
+                }
 
                 return rows;
                // addToast(res.response.data, {appearance: "success"})
@@ -123,6 +140,7 @@ console.log(env.REACT_APP_appId)
     let userId
     let subject;
     let title;
+
     const changeSubject = (newSUbject) =>{
         subject = newSUbject;
         console.log(subject) 
@@ -146,6 +164,7 @@ console.log(env.REACT_APP_appId)
 
     const shiftLesson = (lesson) =>{
         setFocusLesson(lesson)
+        console.log(lesson)
         
     }
     const AddLesson = () =>{
@@ -166,15 +185,16 @@ console.log(env.REACT_APP_appId)
     }
     const Upld = () =>{
         const {addToast} = useToasts(); 
-
+        const [uploadbol, setUploadbool] = useState(false)
+        const [uploadText, setUploadText] = useState('Upload')
         return (
             <div onClick={async()=>{
-                alert('Clicked')
+                setUploadText('Uploading ...')
+                setUploadbool(true)
                 const userStorageRef = firebase.storage().ref().child(uuid());
                 userStorageRef.put(file).then((snapshot)=>{
                     const fileDirectory = snapshot.ref.getDownloadURL().then(async(url)=>{
-                        console.log('done')
-                        console.log(url)
+                       
                         let toUPload = {
                             description,title,file:url,targetClass,teacher:globalUser, userId:globalUser, subject
                         }
@@ -182,19 +202,23 @@ console.log(env.REACT_APP_appId)
                         const rs = await uploadLesson(toUPload);
                         if(rs.error){
                             addToast(rs.error, {appearance: 'error'})
+                            setUploadText('Upload')
+                            setUploadbool(false)
                         }else{
                             addToast(rs.message, {appearance: 'success'})
+                            setUploadText('Upload')
+                            setUploadbool(false)
                             setTimeout(()=>{
                                 window.location.reload();
 
-                            }, 3000)
+                            }, 1000)
                         }
                  
                     })
                 })
                 
             }}>
-            <Button text='Upload' good={true}/>
+            <Button text={uploadText} good={true} loading={uploadbol}/>
             </div>
         )
     }
@@ -223,9 +247,7 @@ console.log(env.REACT_APP_appId)
                <InputText placeHolder="Title" onChange={(e)=>{
                    settitle(e.target.value)
                }}/>
-               <InputText placeHolder="Teacher" onChange={(e)=>{
-                   setteacher(e.target.value)
-               }} />
+             
                 <textarea className='w-full h-40 shadow-sm focus:outline-none p-1' placeholder='Description' onChange={(e)=>{
                     setdescription(e.target.value)
                 }} />
@@ -273,8 +295,13 @@ console.log(env.REACT_APP_appId)
     
     return (
         <ToastProvider>
-            <div className='bg-gray-50'>
+            <div className='bg-gray-50 h-screen w-full'>
            <LessonAdder visible={AddLessonActive} onOpen={AddLesson} />
+           {/* <div className={`${} w-full h-full text-center bg-gray-700 bg-opacity-80 flex`} >
+          
+
+              
+           </div> */}
            <div className='bg-transparent grid grid-cols-3 p-2'>
                 <p className='text-xl'>EIK Upload Tool</p>
                 <div className='flex space-x-2 justify-center'>
@@ -296,7 +323,7 @@ console.log(env.REACT_APP_appId)
             <div className='w-3/5'>
                <LessonsView lessonShifter={shiftLesson} />
             </div>
-            <div className='border-l border-gray-200 w-2/5 py-3 px-8'>
+            <div className={`${FocusLesson.docUUID ? '':'hidden'} border-l border-gray-200 w-2/5 py-3 px-8`}>
                 <p className='text-bold text-2xl'>{FocusLesson.title}</p>
                <ListItem title="Subject" value={FocusLesson.subject}/>
                 <ListItem title="Target Class" value={FocusLesson.targetClass}/>
@@ -316,7 +343,6 @@ console.log(env.REACT_APP_appId)
          </div>
             
         </div>
-        <Footer />
         </ToastProvider>
     )
 }
