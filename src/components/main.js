@@ -40,11 +40,14 @@ export default function Main() {
                   <Route exact path="/dutiesofteachers" component={DutiesOfTeachers} />
                   <Route exact path="/hoswelcome" component={HeadOfSchoolWelcome} />
                   <Route exact path="/extracuriculatactivities" component={extracuriculatactivities} />
-                  <Route exact path="/studentclubs" component={studentclubs} />
+                  <Route exact path="/facilities" component={studentclubs} />
                   <Route exact path="/contact" component={ContactUs} />
                   <Route exact path="/news" component={News} />
                   <Route exact path="/student" component={StudentAccount}/>
                   <Route exact path="/myaccount" component={MyAccount}/>
+                  <Route exact path="/newsandevents/:pathId" render={({match})=>(
+                      <NewsViewer title={match.params.pathId} /> 
+                  )} />
                   {
                     news.forEach(()=>{
                         return <Route exact path={route} render={NewsViewer}/> 

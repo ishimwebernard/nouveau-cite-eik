@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useToasts } from 'react-toast-notifications';
 import { useHistory, Redirect } from "react-router-dom";
 import UserContext from './userGLobal'
+let french = localStorage.getItem('language') == 'FR'
 
 
 
@@ -105,14 +106,18 @@ export default function Menu({mobile, loginErrorFunction}) {
         <div className={` md:flex md:flex-col md:space-y-2 ${mobile ? 'fixed top-16 left-0 m-0 bg-gray-100 w-full h-full z-500':'hidden'}`}>
             <Header title="Menu"  />
             <Link to="/">
-            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">Home</p>
+            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Accueil":"Home"}</p>
             </Link>
-            <MenuItem itemText="About" itemArray={[{text:"Who we are", route:"whoweare"}, {text:"Mission and vision", route:"missionandvision"}, {text:"Head of School welcome", route:"hoswelcome"}]}/>
-            <MenuItem itemText="Strategy" itemArray={[{text:"Duties of parents", route:"dutiesofparents"}, {text:"Duties of Students", route:"dutiesofstudents"}, {text:"Duties of Teachers", route:"dutiesofteachers"}]}/>
-            <MenuItem itemText="Student Life" itemArray={[{text:"Extracuricular Activities", route:"extracuriculatactivities"}, {text:"Student Clubs", route:"studentclubs"}]}/>
-            <MenuItem itemText="News and Events" itemArray={[{text:"News", route:"news"}, {text:"Events", route:"events"}]}/>
-              <Link to="/contact">
-            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">Contact Us</p>
+            <MenuItem itemText={french ? "À propos":"About"} itemArray={[{text:french ? "Qui nous sommes":"Who we are", route:"whoweare"}, {text:french ? "Mission et vision":"Mission and vision", route:"missionandvision"}, {text: french ? "Accueil du chef d'établissement":"Head of School welcome", route:"hoswelcome"}]}/>
+            <MenuItem itemText={french ? "Stratégie":"Strategy"} itemArray={[{text:french ? "Les devoirs des parents":"Duties of parents", route:"dutiesofparents"}, {text:french ? "Les devoirs des étudiants":"Duties of Students", route:"dutiesofstudents"}, {text:french ? "Devoirs des enseignants":"Duties of Teachers", route:"dutiesofteachers"}]}/>
+            {/* <MenuItem itemText="Student Life" itemArray={[{text:"Extracuricular Activities", route:"extracuriculatactivities"}, {text:"School facilities", route:"facilities"}]}/> */}
+            <Link to="/facilities">
+            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Installations scolaires":"School Facilities"}</p>
+            </Link>
+            <Link to="/news">
+            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Nouvelles et Evènements":"News and events"}</p>
+            </Link>              <Link to="/contact">
+            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Nous contacter":"Contact Us"}</p>
             </Link>
             <Header title="Student Login"/>
            <StudentLogin />

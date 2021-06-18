@@ -7,6 +7,7 @@ import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
 import BigCard from './bigCard'
+let french = localStorage.getItem('language') == 'FR'
 
 export default function DutiesOfStudents() {
     window.scrollTo(0, 0)
@@ -17,10 +18,13 @@ export default function DutiesOfStudents() {
            <TitleImage text="DUTIES OF STUDENTS" image={schoollab}/>
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
-            <p className="text-6xl text-gray-800">Duties of Students</p>
-            <Card title="To work hard" description="The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations." />
-            <Card title="To do assignments" description="The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations." />
-            <Card title="Participate" description="The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations." />
+            <Card title="Contribute to class culture and accountability"
+description="Each class should agree upon classroom norms. When students are invited to provide input in classroom rules, they are more likely to hold each other accountable. For a teacher, that could mean less teacher-to-student directives and more peer-to-peer course correction."/>
+<Card title="Be inquisitive" description="Students should be expected to ask questions that nurture their curiosity. Teachers should validate this and allow student input to influence experiential lessons throughout class. Asking questions benefits everyone."/>
+<Card title="Be active participants"
+description="Students should come to school prepared to participate. Full engagement maximizes opportunity for learning and sets the tone for the classroom. This includes but is not limited to, asking and answering questions, completing in-class assignments, and consistently aligning behavior to classroom norms."/>
+
+          
            </div>
                 <Menu />
            </div>

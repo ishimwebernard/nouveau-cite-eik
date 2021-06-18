@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider, useToasts} from "react-toast-notifications"
-
+import Iframe from 'react-iframe'
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
@@ -30,7 +30,7 @@ export default function ContactUs() {
            <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4 ">
            <div className="col-span-2">
             <p className="text-6xl text-gray-800">Contact Us</p>
-           <div className="md:grid md:grid-cols-3 flex flex-col">
+           <div className="">
            <div >
         <div className="flex space-x-2">
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -52,15 +52,9 @@ export default function ContactUs() {
         <p>0789999999</p>
         </div>
            </div>
-               <div className="col-span-2">
-                    <div className="grid grid-cols-2 space-x-2">
-                <InputMessage placeHolder="First Name" />
-                <InputMessage placeHolder="Last Name" />
-            </div>
-            <InputMessage placeHolder="Subject"  big={false} />
-            <InputMessage placeHolder="Message" big={true} />
-            <CustomButton text="Submit" good={true} />
-               </div>
+               <div className="w-full">
+                 
+<Iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.500934594536!2d30.07558551420445!3d-1.9529056372660478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca685894774cf%3A0x96cf0522704fdc3c!2s%C3%89cole%20Internationale%20de%20Kigali!5e0!3m2!1sen!2srw!4v1623990050882!5m2!1sen!2srw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"/>               </div>
 
            </div>
            </div>

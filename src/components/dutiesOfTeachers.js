@@ -7,6 +7,7 @@ import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
 import BigCard from './bigCard'
+let french = localStorage.getItem('language') == 'FR'
 
 export default function DutiesOfStudents() {
     window.scrollTo(0, 0)
@@ -18,8 +19,12 @@ export default function DutiesOfStudents() {
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
             <p className="text-6xl text-gray-800">Duties of Teachers</p>
-            <Card title="To provide needed material" description="The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations." />
-            <Card title="To prepare exams" description="The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations." />
+            <Card title="Sharing Knowledge" 
+            description="First things first, the primary duty of a teacher is to impart knowledge, and that comes from teaching. Teaching usually entails following a specific curriculum and ensuring that the students understand what is being taught."/>
+            <Card title="Role Modeling"
+            description="Although teachers do not see themselves as role models, the truth is they actually are. The amount of time students spend with teachers each day or week makes it possible for them to have a certain level of influence on the students. It is now down to the teacher to make this influence positive or negative."/>
+            <Card title="An External Parent"
+            description="The role of a teacher transcends following a specific lesson plan and work schedule. Because both students and teachers spend as much time together, the teacher inadvertently becomes an external parent. Teachers can be a mentor to help set the child on the right path. In this role, the teacher can encourage the student to be the best they can be, and also be a source of inspiration and advice to the students."/>
            </div>
                 <Menu />
            </div>

@@ -3,19 +3,21 @@ import { Carousel } from 'react-bootstrap';
 import basketball from '../assets/basketball.jpg'
 import focusgirl from '../assets/focusgirl.jpg'
 import learningboy from '../assets/learningboy.jpg'
-import schoollab from '../assets/schoollab.jpg'
+import schoollab from '../assets/codebreaker.jpg'
+import schoolOpening from '../assets/schoolopening.jpg'
+import wholeClass from '../assets/wholeclassaerial.jpg'
 import '../carousel.css'
 
 export default function SlideShow() {
     return (
-    <div className=" h-full w-full">
+    <div className=" h-screen w-full">
         
-        <div className="h-full">
+        <div className="h-screen ">
             <Carousel>
   <Carousel.Item>
     <img
-      className="image-caroussel-size w-100 resize-carousel"
-      src={learningboy}
+      className="image-caroussel-size w-100 resize-carousel h-screen"
+      src={schoolOpening}
       alt="First slide"
     />
     <Carousel.Caption>
@@ -38,7 +40,7 @@ export default function SlideShow() {
   <Carousel.Item>
     <img
       className="image-caroussel-size w-100 resize-carousel"
-      src={focusgirl}
+      src={wholeClass}
       alt="Second slide"
     />
 
