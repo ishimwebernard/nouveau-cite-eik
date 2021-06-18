@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios'
-import {ToastProvider, useToasts} from "react-toast-notifications"
-import { useHistory, Redirect } from "react-router-dom";
+import React, {} from 'react'
+import {ToastProvider} from "react-toast-notifications"
+import { useHistory } from "react-router-dom";
 let french = localStorage.getItem('language') == 'FR'
 
 const News = ({ image,title, content }) =>{

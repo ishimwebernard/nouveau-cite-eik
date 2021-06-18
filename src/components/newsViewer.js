@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Header from './header'
 import Menu from './menu'
-import {ToastProvider, useToasts} from "react-toast-notifications"
-import schoollab from '../assets/schoollab.jpg'
+import {ToastProvider} from "react-toast-notifications"
 import Footer from './footer'
 import Skeleton from 'react-loading-skeleton';
 

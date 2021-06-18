@@ -1,7 +1,5 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap';
-import basketball from '../assets/basketball.jpg'
-import focusgirl from '../assets/focusgirl.jpg'
 import learningboy from '../assets/learningboy.jpg'
 import schoollab from '../assets/codebreaker.jpg'
 import schoolOpening from '../assets/schoolopening.jpg'

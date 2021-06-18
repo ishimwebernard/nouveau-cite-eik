@@ -1,12 +1,11 @@
 import React from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
-import {ToastProvider, useToasts} from "react-toast-notifications"
+import {ToastProvider} from "react-toast-notifications"
 
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
-import BigCard from './bigCard'
 
 export default function Extracuricular() {
     window.scrollTo(0, 0)

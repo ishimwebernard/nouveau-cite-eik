@@ -1,7 +1,7 @@
 import React from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
-import {ToastProvider, useToasts} from "react-toast-notifications"
+import {ToastProvider} from "react-toast-notifications"
 
 import Header from './header';
 import Menu from './menu';

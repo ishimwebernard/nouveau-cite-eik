@@ -1,12 +1,11 @@
 import React,{useState, useEffect} from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
-import {ToastProvider, useToasts} from "react-toast-notifications"
+import {ToastProvider} from "react-toast-notifications"
 import axios from "axios"
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
-import BigCard from './bigCard'
 import NewsComponent from './recentNews'
 
 export default function News() {

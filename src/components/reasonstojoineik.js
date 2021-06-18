@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import schoollab from '../assets/schoollab.jpg'
 
-import Typist from 'react-typist';
 let french = localStorage.getItem('language') == 'FR'
 const delay = 5000;
 

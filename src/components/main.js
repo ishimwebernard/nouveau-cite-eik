@@ -1,9 +1,8 @@
-import React, {createContext, useState} from 'react';
+import React, {useState} from 'react';
 import UserContext from './userGLobal'
 import Index from './index';
 import MissionAndVision from './missionandvision'
-import { BrowserRouter as Router, Switch, Route, withRouter} from 'react-router-dom'
-import {toast, ToastContainer} from "react-toastify"
+import { Switch, Route} from 'react-router-dom'
 import WhoWeAre from './whoweare';
 import DutiesOfParents from './dutiesOfParents' 
 import DutiesOfStudents from './dutiesOfStudents'

@@ -1,4 +1,4 @@
-import {ToastProvider, useToasts} from "react-toast-notifications"
+import {ToastProvider} from "react-toast-notifications"
 import React, { useState, useEffect } from 'react';
 import Header from './header';
 import SlideShow from './slideshow';

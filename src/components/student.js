@@ -1,8 +1,6 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import UserContext from './userGLobal'
 import {ToastProvider, useToasts} from 'react-toast-notifications'
-import Footer from './footer'
 import Button from './Button'
 import Loader from "react-loader-spinner";
 

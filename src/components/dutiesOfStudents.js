@@ -1,12 +1,11 @@
 import React from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
-import {ToastProvider, useToasts} from "react-toast-notifications"
+import {ToastProvider} from "react-toast-notifications"
 
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
-import BigCard from './bigCard'
 let french = localStorage.getItem('language') == 'FR'
 
 export default function DutiesOfStudents() {
@@ -15,14 +14,14 @@ export default function DutiesOfStudents() {
     return (<ToastProvider>
         <div className="bg-gray-100">
             <Header absolute={false} />
-           <TitleImage text="DUTIES OF STUDENTS" image={schoollab}/>
+           <TitleImage text={french ? "Devoirs des étudiants":"Duties of Students"} image={schoollab}/>
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
-            <Card title="Contribute to class culture and accountability"
-description="Each class should agree upon classroom norms. When students are invited to provide input in classroom rules, they are more likely to hold each other accountable. For a teacher, that could mean less teacher-to-student directives and more peer-to-peer course correction."/>
-<Card title="Be inquisitive" description="Students should be expected to ask questions that nurture their curiosity. Teachers should validate this and allow student input to influence experiential lessons throughout class. Asking questions benefits everyone."/>
-<Card title="Be active participants"
-description="Students should come to school prepared to participate. Full engagement maximizes opportunity for learning and sets the tone for the classroom. This includes but is not limited to, asking and answering questions, completing in-class assignments, and consistently aligning behavior to classroom norms."/>
+            <Card title={french ? "Contribuer à la culture de classe et à la responsabilité":"Contribute to class culture and accountability"}
+description={french ? "Chaque classe doit se mettre d'accord sur les normes de la classe. Lorsque les élèves sont invités à donner leur avis sur les règles de la classe, ils sont plus susceptibles de se tenir mutuellement responsables. Pour un enseignant, cela pourrait signifier moins de directives enseignant à élève et plus de correction de cours entre pairs.":"Each class should agree upon classroom norms. When students are invited to provide input in classroom rules, they are more likely to hold each other accountable. For a teacher, that could mean less teacher-to-student directives and more peer-to-peer course correction."}/>
+<Card title={french ? "Soyez curieux":"Be inquisitive"} description={french ? "Il faut s'attendre à ce que les élèves posent des questions qui alimentent leur curiosité. Les enseignants doivent valider cela et permettre aux élèves d'influencer les leçons expérientielles tout au long de la classe. Poser des questions profite à tout le monde.":"Students should be expected to ask questions that nurture their curiosity. Teachers should validate this and allow student input to influence experiential lessons throughout class. Asking questions benefits everyone."}/>
+<Card title={french ? "Soyez des participants actifs":"Be active participants"}
+description={french ? "Les élèves doivent venir à l'école prêts à participer. Un engagement total maximise les opportunités d'apprentissage et donne le ton à la classe. Cela inclut, mais sans s'y limiter, poser et répondre à des questions, effectuer des devoirs en classe et aligner systématiquement le comportement sur les normes de la classe.":"Students should come to school prepared to participate. Full engagement maximizes opportunity for learning and sets the tone for the classroom. This includes but is not limited to, asking and answering questions, completing in-class assignments, and consistently aligning behavior to classroom norms."}/>
 
           
            </div>

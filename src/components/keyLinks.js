@@ -1,5 +1,4 @@
 import React from 'react'
-import { Carousel } from 'react-bootstrap'
 import Academics from '../assets/academic.png'
 let french = localStorage.getItem('language') == 'FR'
 

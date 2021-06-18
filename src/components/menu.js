@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import CustomButton from './Button';
 import axios from 'axios'
 import { useToasts } from 'react-toast-notifications';
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import UserContext from './userGLobal'
 let french = localStorage.getItem('language') == 'FR'
 
