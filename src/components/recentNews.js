@@ -6,12 +6,12 @@ let french = localStorage.getItem('language') == 'FR'
 const News = ({ image,title, content }) =>{
     const history = useHistory()
     return (
-        <div className="md:grid md:grid-cols-6 w-full bg-white shadow-md space-x-8 mt-4 rounded-xl cursor-pointer" onClick={()=>{
+        <div className="grid md:grid-cols-6 grid-cols-3 w-full bg-white shadow-md space-x-8 mt-4 rounded-xl cursor-pointer" onClick={()=>{
             const titleManip = String(title).replaceAll(' ', '-')
             history.push(`/newsandevents/${titleManip}`)
         }}>
             <p className="font-bold text-8xl text-center bg-green-700 text-gray-50 h-full uppercase">{title.substring(0,1)}</p> 
-            <div className="md:col-span-5 mt-4 flex flex-col">
+            <div className="md:col-span-5 col-span-2 mt-4 flex flex-col">
                 <p className="w-full text-gray-800 text-4xl">{title}</p>
                 <p className="mt-0 text-gray-500 mr-4">{content}</p>
             </div>

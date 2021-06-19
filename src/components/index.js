@@ -41,8 +41,8 @@ export default function Main() {
     }, [])
     return (
        <ToastProvider>
-            <div className="bg-gray-100 flex flex-col">
-            <div className="h-screen w-full">
+            <div className="bg-gray-100 ">
+            <div className="w-full">
             <Header absolute={false} onBurgerClicked={()=>{
                 setMobile(!mobile);
             }}/>
@@ -50,8 +50,8 @@ export default function Main() {
             <SlideShow  />
             </div>
             </div>
-            <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
-                <div className="mt-20 md:mt-0 md:col-span-2 py-2">
+            <div className="md:grid md:grid-cols-3 px-7 space-x-4 mt-10">
+                <div className=" md:col-span-2 "> 
                     <Reasons />
                     <News  news={news ? news: []} />
                     <KeyLinks />

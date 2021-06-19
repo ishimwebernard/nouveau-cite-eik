@@ -8,13 +8,13 @@ import '../carousel.css'
 
 export default function SlideShow() {
     return (
-    <div className=" h-screen w-full">
+    <div className=" w-full">
         
-        <div className="h-screen ">
+        <div className=" ">
             <Carousel>
   <Carousel.Item>
     <img
-      className="image-caroussel-size w-100 resize-carousel h-screen"
+      className=" w-100 resize-carousel"
       src={schoolOpening}
       alt="First slide"
     />
@@ -25,7 +25,7 @@ export default function SlideShow() {
   </Carousel.Item>
   <Carousel.Item>
     <img
-      className="image-caroussel-size w-100 resize-carousel"
+      className=" w-100 resize-carousel"
       src={learningboy}
       alt="Second slide"
     />
@@ -37,7 +37,7 @@ export default function SlideShow() {
   </Carousel.Item>
   <Carousel.Item>
     <img
-      className="image-caroussel-size w-100 resize-carousel"
+      className=" w-100 resize-carousel"
       src={wholeClass}
       alt="Second slide"
     />

@@ -7,7 +7,7 @@ export default function TitleImage({ image, text }) {
             <img src={image} className=" h-96 w-full object-cover " />
             <div className="absolute top-0 w-full h-full bg-gray-800 bg-opacity-40   grid grid-rows-3">
             <div></div>
-                <p className="text-center text-7xl font-semibold text-gray-100">{text}</p>
+                <p className="text-center md:text-7xl text-5xl font-semibold text-gray-100">{text}</p>
             </div>
             </div>
         </div>
