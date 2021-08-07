@@ -22,7 +22,7 @@ export default function LessonAdder({ visible}) {
     return (
         <div className={`${ k ? 'fixed':'hidden'}  fixed h-full w-full bg-gray-700 bg-opacity-50 justify-center`}>
            <div className='m-auto bg-gray-50 w-3/4 h-4/5 mt-10 px-8 py-4 rounded-lg' >
-           <p className='font-semibold text-2xl flex flex-col space-y-2' >Upload New Lesson</p>
+           <p className='font-bold text-2xl flex flex-col space-y-2' >Upload New Lesson</p>
            <InputText placeHolder="Subject" />
            <InputText placeHolder="Title" />
            <InputText placeHolder="Teacher" />

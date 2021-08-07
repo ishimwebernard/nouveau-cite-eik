@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider} from "react-toast-notifications"
-
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
@@ -10,12 +9,14 @@ let french = localStorage.getItem('language') == 'FR'
 
 export default function DutiesOfStudents() {
     window.scrollTo(0, 0)
-
+    const [mobile, setMobile] = useState(false);
     return (<ToastProvider>
         <div className="bg-gray-100">
-            <Header absolute={false} />
+            <Header absolute={false} onBurgerClicked={()=>{
+                setMobile(!mobile);
+            }}/>/>
            <TitleImage text={french ? "Devoirs des enseignants":"Duties of Teachers"} image={schoollab}/>
-           <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
             <Card title={french ? "Partager ses connaissances":"Sharing Knowledge" }
             description={french ? "Tout d'abord, le premier devoir d'un enseignant est de transmettre des connaissances, et cela vient de l'enseignement. L'enseignement implique généralement de suivre un programme spécifique et de s'assurer que les étudiants comprennent ce qui est enseigné.":"First things first, the primary duty of a teacher is to impart knowledge, and that comes from teaching. Teaching usually entails following a specific curriculum and ensuring that the students understand what is being taught."}/>
@@ -24,7 +25,7 @@ export default function DutiesOfStudents() {
             <Card title={french ? "Un parent externe":"An External Parent"}
             description={french ? "Le rôle d'un enseignant transcende le fait de suivre un plan de cours et un horaire de travail spécifiques. Parce que les élèves et les enseignants passent autant de temps ensemble, l'enseignant devient par inadvertance un parent externe. Les enseignants peuvent être un mentor pour aider à mettre l'enfant sur la bonne voie. Dans ce rôle, l'enseignant peut encourager l'élève à être le meilleur possible, et également être une source d'inspiration et de conseils pour les élèves.":"The role of a teacher transcends following a specific lesson plan and work schedule. Because both students and teachers spend as much time together, the teacher inadvertently becomes an external parent. Teachers can be a mentor to help set the child on the right path. In this role, the teacher can encourage the student to be the best they can be, and also be a source of inspiration and advice to the students."}/>
            </div>
-                <Menu />
+                <Menu mobile={mobile} />
            </div>
            <Footer />
         </div></ToastProvider>

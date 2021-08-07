@@ -14,7 +14,7 @@ export default function Extracuricular() {
         <div className="bg-gray-100">
             <Header absolute={false} />
            <TitleImage text="Extra Curricular Activities" image={schoollab}/>
-           <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
             <p className="text-6xl text-gray-800">Extracuricular Activities</p>
            <div className="flex flex-col w-full h-full" >

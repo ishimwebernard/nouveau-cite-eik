@@ -56,11 +56,7 @@ export default function Main() {
                     <News  news={news ? news: []} />
                     <KeyLinks />
                 </div>
-                <Menu mobile={mobile} loginErrorFunction={(error)=>{
-                    //     const { addToast } = useToasts();
-
-                    // addToast(error, {appearance: 'error'})
-                }}/>
+                <Menu mobile={mobile}/>
             </div>
             <Footer />
 

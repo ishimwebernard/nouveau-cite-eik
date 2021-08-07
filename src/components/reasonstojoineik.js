@@ -14,7 +14,7 @@ const ReasonItem = ({ number, title, subtitle }) =>{
     return (
             <div className=" items-center  flex flex-col space-y-0 px-4">
                 <p className="md:text-center md:text-8xl text-4xl text-gray-100 ">{number}</p>
-               <p className="text-white md:text-4xl text-2xl font-semibold w-full " >{title}</p>
+               <p className="text-white md:text-4xl text-2xl font-bold w-full title-confortaa" >{title}</p>
                 <p className="text-gray-200 p-0 m-0">{subtitle}</p>
             </div>
     );
@@ -62,7 +62,7 @@ export default function Reasons() {
           <div className="relative mt-0 top-0">
             <img src={schoollab} className="h-96 w-full object-cover" />
             <div className="absolute bg-gray-800 bg-opacity-70 top-0 w-full h-full sm:items-left">
-            <p className="md:mt-4 mt-2 md:ml-4 ml-2 text-gray-100 text-2xl md:text-4xl ">Reasons to join EIK</p>
+            <p className="md:mt-4 mt-2 md:ml-4 ml-2 text-gray-100 text-2xl md:text-4xl ">{french ? "Raisons de rejoindre EIK":"Reasons to join EIK"}</p>
 
                 <div className=" w-full h-full items-center text-center">
                     <ReasonItem  number={main_reasons[index].number} title={main_reasons[index].title} subtitle={main_reasons[index].description} />

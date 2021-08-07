@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider} from "react-toast-notifications"
@@ -10,10 +10,12 @@ let french = localStorage.getItem('language') == 'FR'
 
 export default function WhoWeAre() {
     window.scrollTo(0, 0)
-
+    const [mobile, setMobile] = useState(false);
     return (<ToastProvider>
         <div className="bg-gray-100">
-            <Header absolute={false} />
+            <Header absolute={false} onBurgerClicked={()=>{
+                setMobile(!mobile);
+            }} />
            <TitleImage text={french ? "Qui nous sommes":"Who we are"} image={schoollab}/>
            <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
@@ -23,7 +25,7 @@ export default function WhoWeAre() {
 This is why some parents with experience and concern for education came together in an association, to create a school meeting this urgent concern and priority is education of children
             </p>
            </div>
-                <Menu />
+                <Menu mobile={mobile}  />
            </div>
            <Footer />
         </div></ToastProvider>

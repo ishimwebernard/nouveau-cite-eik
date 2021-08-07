@@ -5,12 +5,21 @@ import Menu from './menu'
 import {ToastProvider} from "react-toast-notifications"
 import Footer from './footer'
 import Skeleton from 'react-loading-skeleton';
+import { Link } from 'react-router-dom'
 
 const NewsComponent = ({title, image, parag}) =>{
+    const [isErroneous, setIsErroneous] = useState(false)
     return (
         <div>
             <p className="font-bold text-green-700 text-4xl">{title} </p>
-            <img className=" rounded-xl h-96 w-3/4 mt-4" src={image} />
+            <img className={isErroneous ? "hidden":" rounded-xl h-96 w-full mt-4" } src={image} onError={()=>{
+                setIsErroneous(!isErroneous)
+            }} />
+            <span className={isErroneous ? "text-b font-bold px-2 py-2 cursor-pointer ":"hidden"}>
+<span onClick={()=>{
+                        window.open(image, '_blank')
+                    }}>View Attachement</span>
+            </span>
             <p className="text-gray-600 mt-4" >{parag} </p>
         </div>
     )

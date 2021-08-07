@@ -1,11 +1,11 @@
 import React from 'react';
 import Logo from '../assets/schoollogo.png'
 
-export default function Header({ absolute, onBurgerClicked }) {
+export default function Header({ onBurgerClicked }) {
     return (
-        <div className={`flex flex-row space-x-4 items-center md:px-16 px-8 py-2  w-full  top-0 z-50 `}>
+        <div className={`flex  flex-row space-x-4 items-center md:px-16 px-8 py-2  w-full  top-0 z-50 header-background `}>
             <img src={Logo} className="md:h-20 md:w-20 h-14 w-14" alt="Ecole international de kigali"/>
-            <p className="hidden md:block md:text-4xl text-green-700">Ecole international de Kigali</p>
+            <p className="hidden md:block md:text-4xl text-green-700 ">École Internationale De Kigali</p>
            
             <div className="flex space-x-4 absolute right-10">
            <img className="h-10 w-10 cursor-pointer" onClick={()=>{

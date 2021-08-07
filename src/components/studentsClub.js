@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TitleImage from './titleimage';
-import schoollab from '../assets/schoollab.jpg'
+import schoollab from '../assets/schoolopening.jpg'
 import {ToastProvider} from "react-toast-notifications"
 
 import Header from './header';
@@ -10,12 +10,14 @@ let french = localStorage.getItem('language') == 'FR'
 
 export default function Extracuricular() {
     window.scrollTo(0, 0)
-
+    const [mobile, setMobile] = useState(false);
     return (<ToastProvider>
         <div className="bg-gray-100">
-            <Header absolute={false} />
+        <Header absolute={false} onBurgerClicked={()=>{
+                setMobile(!mobile);
+            }}/>
            <TitleImage text={french ? "Facilites pour l\'apprentissage":"School Facilities"} image={schoollab}/>
-           <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2"> 
            <Card title={french ? "Labo informatique":"ICT Laboratory"} description={french ? "L’Ecole Internationale de Kigali dispose d’un Labo informatique moderne équipé de 30 ordinateurs servant pour l’apprentissage des élèves pendant le cours d’ICT (Information Communication Technology). L’enseignant de ce cours lui-même est un informaticien de formation. Il dispose d’un Bachelors’ Degree en IT (Information Technology) justifiant la capacité qui lui permet donner aux apprenants les connaissances requises au niveau des cycles d’enseignement dont dispose l’école, voire même plus haut. Le motif d’installer le labo d’informatique de qualité est de permettre à nos élèves d’avoir des connaissances de base solides en matière d’informatique, et ainsi, les préparer dès leur jeune âge à pouvoir s’intégrer dans le monde d’aujourd’hui et le monde à venir qui les attend et qui, en perspective, sera plus régi par l’informatique dans tous les secteurs de la vie.  ":"Ecole Internationale de Kigali is set up by the ICT Laboratory, equipped by 30computers used by the learners during ICT lessons. (Information CommunicationTechnology). The ICT teachers must have at least bachelor’s degree in IT(Information Technology) which determines his/her capacity to deliver thesignificant and comprehensive skills to the learners on which the school’s levels oflearning are founded. The main motive of putting in place the standard ICT lab, isto enable our students to move with both today’s world and tomorrow’s worldwhich will be entirely driven by ICT in all sectors of life." } svg={(<svg xmlns="http://www.w3.org/2000/svg" class="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -31,7 +33,7 @@ export default function Extracuricular() {
 </svg>)} />
 
            </div>
-                <Menu />
+           <Menu mobile={mobile}/>
            </div>
            <Footer />
         </div></ToastProvider>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import {Link} from "react-router-dom";
+import { useToasts } from 'react-toast-notifications';
+
 import CustomButton from './Button';
 let french = localStorage.getItem('language') == 'FR'
 
@@ -103,7 +105,7 @@ const MenuItem = ({ itemText, itemArray, itemLink }) =>{
 
     return (
         <div className="px-6 cursor-pointer ">
-                <p className="font-semibold text-md "  onClick={()=>{
+                <p className="font-bold text-md "  onClick={()=>{
                     setExpanded(!expanded);
                 }}    >{itemText}</p>
                 {expanded ? <div>{rows}</div> : ''}
@@ -116,24 +118,24 @@ export default function BurgerMenu({visible}) {
         <div className={`${visible ? '':'hidden'}`} >
              <Header title="Menu"  />
             <Link to="/">
-            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Accueil":"Home"}</p>
+            <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Accueil":"Home"}</p>
             </Link>
             <MenuItem itemText={french ? "À propos":"About"} itemArray={[{text:french ? "Qui nous sommes":"Who we are", route:"whoweare"}, {text:french ? "Mission et vision":"Mission and vision", route:"missionandvision"}, {text: french ? "Accueil du chef d'établissement":"Head of School welcome", route:"hoswelcome"}]}/>
             <MenuItem itemText={french ? "Stratégie":"Strategy"} itemArray={[{text:french ? "Les devoirs des parents":"Duties of parents", route:"dutiesofparents"}, {text:french ? "Les devoirs des étudiants":"Duties of Students", route:"dutiesofstudents"}, {text:french ? "Devoirs des enseignants":"Duties of Teachers", route:"dutiesofteachers"}]}/>
             {/* <MenuItem itemText="Student Life" itemArray={[{text:"Extracuricular Activities", route:"extracuriculatactivities"}, {text:"School facilities", route:"facilities"}]}/> */}
             <Link to="/facilities">
-            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Installations scolaires":"School Facilities"}</p>
+            <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Installations scolaires":"School Facilities"}</p>
             </Link>
             <Link to="/news">
-            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Nouvelles et Evènements":"News and events"}</p>
+            <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Nouvelles et Evènements":"News and events"}</p>
             </Link>              <Link to="/contact">
-            <p className="font-semibold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Nous contacter":"Contact Us"}</p>
+            <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Nous contacter":"Contact Us"}</p>
             </Link>
             <Header title="Student Login"/>
            <StudentLogin />
             <div className='py-4' >
             <Header title="Teachers Login"/>
-            <LoginSnippet loginErrorFunction={loginErrorFunction}/>
+            <LoginSnippet />
         </div>
         </div>
     )

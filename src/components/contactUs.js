@@ -7,11 +7,11 @@ import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
 import CustomButton from './Button';
-import BurgerMenu from './BurgerMenu'
 
 
 
 export default function ContactUs() {
+    const [mobile, setMobile] = useState(false);
     const [burgerVisible, setBurgerVisible] = useState(false);
     const changeBurgerVisibility = () =>{
         setBurgerVisible(!burgerVisible)
@@ -20,11 +20,10 @@ export default function ContactUs() {
 
     return (<ToastProvider>
         <div className="bg-gray-100">
-            <Header absolute={false} onBurgerClicked={()=>{
-               changeBurgerVisibility();
-                console.log(burgerVisible);
-            }}  />
-                        <BurgerMenu visible={burgerVisible}/>
+        <Header absolute={false} onBurgerClicked={()=>{
+                setMobile(!mobile);
+            }}/>
+                        
 
            <TitleImage text="CONTACT" image={schoollab}/>
            <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4 ">
@@ -58,7 +57,7 @@ export default function ContactUs() {
 
            </div>
            </div>
-                <Menu />
+           <Menu mobile={mobile}/>
            </div>
            <Footer />
         </div></ToastProvider>

@@ -13,6 +13,10 @@ html,body{
   background: #f3f4f6a6;
   backdrop-filter: blur(20px);
 }
+.title-confortaa{
+  font-family: 'Comfortaa', cursive;
+  letter-spacing: -0.05em;
+}
 
 .centeredheight{
   top: 50%;
@@ -21,33 +25,29 @@ html,body{
 *{
   font-family: 'Poppins', sans-serif;
 }
-@media only screen and (min-width: 1536px){
-    html, body{
-        font-size: 15px;
-    }
+.button-background{
+  background: linear-gradient(180deg, #059669, #047857);
 }
-
-@media only screen and (min-width: 1280px){
-    html, body{
-        font-size: 15px;
-    }
+.header-background{
+  background: linear-gradient(180deg, #F9FAFB,#F3F4F6, #E5E7EB);
 }
-@media only screen and (min-width: 1024px){
-    html, body{
-        font-size: 14px;
-    }
+.gray-grad{
+  background: linear-gradient(180deg,#D1D5DB ,#9CA3AF);
+}
+.text-b{
+  background: linear-gradient(180deg, #FCD34D, #FBBF24);
 }
 
 
 @media only screen and (min-width: 768px){
     html, body{
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
 @media only screen and (min-width: 640px){
     html, body{
-        font-size: 13px;
+        font-size: 16px;
     }
 }
 @media only screen and (max-width: 639px){

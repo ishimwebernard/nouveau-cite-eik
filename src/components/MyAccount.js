@@ -9,6 +9,10 @@ import env from 'react-dotenv'
 import uuid from 'react-uuid'
 import '@firebase/storage'
 import Loader from "react-loader-spinner";
+import {Link} from 'react-router-dom' 
+
+let french = localStorage.getItem('language') == 'FR'
+
 const firebaseConfig = {
     apiKey: "AIzaSyBLtbU8MWi_BHunfQ7b4a6JPad0Jdmeh9E",
     authDomain: "ecole-internationale-dekigli.firebaseapp.com",
@@ -58,7 +62,7 @@ const LessonsView = ({lessonShifter}) =>{
         <div>
              <p className='text-center m-auto text-green-700 flex font-bold text-2xl ' >
                <Loader type="TailSpin" color="#047857" height={80} width={80} />
-               Loading
+               {french ? 'Chargement': 'Loading'}
                </p>
         </div>
     );
@@ -133,13 +137,14 @@ console.log(env.REACT_APP_appId)
     } 
     const [FocusLesson, setFocusLesson] = useState({})
     const [AddLessonActive, setAddLessonActive] = useState(false);
-    let file
-    let description
+    const [AddEventActive, setAddEventActive] = useState(false);
+    let file, eventfile
+    let description, eventdescription
     let teacher
     let targetClass
     let userId
     let subject;
-    let title;
+    let title, eventtitle;
 
     const changeSubject = (newSUbject) =>{
         subject = newSUbject;
@@ -147,6 +152,9 @@ console.log(env.REACT_APP_appId)
     }
     const setLessonFile = (newFIle) =>{
         file = newFIle
+    }
+    const seteventFile = (newFIle) =>{
+        eventfile = newFIle
     }
     const setteacher = (newteacher) =>{
         teacher = newteacher
@@ -162,6 +170,13 @@ console.log(env.REACT_APP_appId)
         title = newtitle
     }
 
+    const seteventdescription = (newdescription) =>{
+        eventdescription = newdescription
+    }
+    const seteventtitle = (newtitle) =>{
+        eventtitle = newtitle
+    }
+
     const shiftLesson = (lesson) =>{
         setFocusLesson(lesson)
         console.log(lesson)
@@ -169,6 +184,9 @@ console.log(env.REACT_APP_appId)
     }
     const AddLesson = () =>{
         setAddLessonActive(!AddLessonActive)
+    }
+    const AddEvent = () => {
+        setAddEventActive(!AddEventActive)
     }
     const uploadLesson = async(data) =>{
         try{
@@ -183,10 +201,23 @@ console.log(env.REACT_APP_appId)
             return {error: error.response.data.data, message: null}
         }
     }
+    const UploadNews = async(data) =>{
+        try{
+            const res = await axios({
+                method: 'post',
+                url: 'https://ecole-internationale-de-kigali.herokuapp.com/news/',
+                data
+            })
+            console.log(res)
+            return {error: null, message: res.data.message}
+        }catch(error){
+            return {error: error.response.data.data, message: null}
+        }
+    }
     const Upld = () =>{
         const {addToast} = useToasts(); 
         const [uploadbol, setUploadbool] = useState(false)
-        const [uploadText, setUploadText] = useState('Upload')
+        const [uploadText, setUploadText] = useState(french ? 'Télécharger':'Upload')
         return (
             <div onClick={async()=>{
                 setUploadText('Uploading ...')
@@ -202,11 +233,11 @@ console.log(env.REACT_APP_appId)
                         const rs = await uploadLesson(toUPload);
                         if(rs.error){
                             addToast(rs.error, {appearance: 'error'})
-                            setUploadText('Upload')
+                            setUploadText(french ? 'Télécharger':'Upload')
                             setUploadbool(false)
                         }else{
                             addToast(rs.message, {appearance: 'success'})
-                            setUploadText('Upload')
+                            setUploadText(french ? 'Télécharger':'Upload')
                             setUploadbool(false)
                             setTimeout(()=>{
                                 window.location.reload();
@@ -222,13 +253,59 @@ console.log(env.REACT_APP_appId)
             </div>
         )
     }
+
+
+    const UploadEvent = () =>{
+        const {addToast} = useToasts(); 
+        const [uploadbol, setUploadbool] = useState(false)
+        const [uploadText, setUploadText] = useState(french ? 'Télécharger':'Upload')
+        return (
+            <div onClick={async()=>{
+                setUploadText('Uploading ...')
+                setUploadbool(true)
+                const userStorageRef = firebase.storage().ref().child(uuid());
+                userStorageRef.put(eventfile).then((snapshot)=>{
+                    const fileDirectory = snapshot.ref.getDownloadURL().then(async(url)=>{
+                       
+                        let toUPload = {
+                            title: eventtitle,
+                            body: eventdescription,
+                            picture: url
+                        }
+                        console.log(toUPload)
+                        const rs = await UploadNews(toUPload);
+                        if(rs.error){
+                            addToast(rs.error, {appearance: 'error'})
+                            setUploadText(french ? 'Télécharger':'Upload')
+                            setUploadbool(false)
+                        }else{
+                            addToast(rs.message, {appearance: 'success'})
+                            setUploadText(french ? 'Télécharger':'Upload')
+                            setUploadbool(false)
+                            setTimeout(()=>{
+                                window.location.reload();
+
+                            }, 1000)
+                        }
+                 
+                    })
+                })
+                
+            }}>
+            <Button text={uploadText} good={true} loading={uploadbol}/>
+            </div>
+        )
+    }
+
+
+
     function LessonAdder({ visible, onOpen, loading}) {
         console.log('initials: ', visible)
         return (
             <div className={`${ visible ? 'fixed':'hidden'} ${loading ? 'opacity-50':''}  fixed h-full w-full bg-gray-700 bg-opacity-50 justify-center`}>
    
                <div className='m-auto bg-gray-50 w-3/4 h-4/5 mt-10 px-8 py-4 rounded-lg' >
-               <p className='font-semibold text-2xl flex flex-col space-y-2' >Upload New Lesson</p>
+               <p className='font-bold text-2xl flex flex-col space-y-2' >{french ? "Télécharger une nouvelle leçon":"Upload New Lesson"}</p>
                <InputText placeHolder="Subject" onChange={(e)=>{
                    //console.log(e.target.value)
                    changeSubject(e.target.value)
@@ -237,12 +314,12 @@ console.log(env.REACT_APP_appId)
                    console.log(e.target.value)
                    settargetClass(e.target.value)
                }}>
-                   <option value='p1'>Primary 1</option>
-                   <option value='p2'>Primary 2</option>
-                   <option value='p3'>Primary 3</option>
-                   <option value='p4'>Primary 4</option>
-                   <option value='p5'>Primary 5</option>
-                   <option value='p6'>Primary 6</option>
+                   <option value='p1'>{french ? "Première année":"Primary 1"}</option>
+                   <option value='p2'>{french ? "Deuxième année":"Primary 2"}</option>
+                   <option value='p3'>{french ? "Troisième année":"Primary 3"}</option>
+                   <option value='p4'>{french ? "Quatrième année":"Primary 4"}</option>
+                   <option value='p5'>{french ? "Cinquième année":"Primary 5"}</option>
+                   <option value='p6'>{french ? "Sixième année":"Primary 6"}</option>
                </select>
                <InputText placeHolder="Title" onChange={(e)=>{
                    settitle(e.target.value)
@@ -261,13 +338,51 @@ console.log(env.REACT_APP_appId)
                         
                         onOpen()
                         }}>
-                    <Button text='Cancel' good={false}   />
+                    <Button text={french ? 'Annuler':'Cancel'} good={false}   />
                     </div>
                 </div>
                </div>
             </div>
         )
     }
+
+
+    function EventAdder({ eventvisible, onEventOpen, eventloading}) {
+        console.log('initials: ', eventvisible)
+        return (
+            <div className={`${ eventvisible ? 'fixed':'hidden'} ${eventloading ? 'opacity-50':''}  fixed h-full w-full bg-gray-700 bg-opacity-50 justify-center`}>
+   
+               <div className='m-auto bg-gray-50 w-3/4 h-4/5 mt-10 px-8 py-4 rounded-lg' >
+               <p className='font-bold text-2xl flex flex-col space-y-2' >{french ? "Télécharger un nouvel événement":"Upload New Event"}</p>
+
+               <InputText placeHolder={french ? "Titre de l'événement":"Event Title"} onChange={(e)=>{
+                   seteventtitle(e.target.value)
+               }}/>
+             
+                <textarea className='w-full h-40 shadow-sm focus:outline-none p-1' placeholder={french ? 'description de l\'évenement':'Event Description'} onChange={(e)=>{
+                    seteventdescription(e.target.value)
+                }} />
+                <input type='file' onChange={(e)=>{
+                    console.log(e.target.files)
+                    seteventFile(e.target.files[0])
+                    
+                }} />
+                <div className='flex space-x-4 w-full' >
+                    <UploadEvent />
+                    <div onClick={()=>{
+                        
+                        onEventOpen()
+                        }}>
+                    <Button text={french ? 'Annuler':'Cancel'} good={false}   />
+                    </div>
+                </div>
+               </div>
+            </div>
+        )
+    }
+
+
+
 
     const DeleteButton = () =>{
         const {addToast} = useToasts(); 
@@ -281,13 +396,14 @@ console.log(env.REACT_APP_appId)
                         data: {doc: FocusLesson.docUUID}
                     }
                 )
-                addToast('Lesson deleted succesfully', {appearance: 'success'})
+                let msg = french ? 'Leçon supprimée avec succès':'Lesson deleted succesfully'
+                addToast(msg, {appearance: 'success'})
                 setTimeout(()=>{
                     window.location.reload();
 
                 }, 3000)
             }} >
-            <Button text="Delete"  />
+            <Button text={french ? "Supprimer":"Delete"}  />
             </div>
         )
     }
@@ -297,24 +413,41 @@ console.log(env.REACT_APP_appId)
         <ToastProvider>
             <div className='bg-gray-50 h-screen w-full'>
            <LessonAdder visible={AddLessonActive} onOpen={AddLesson} />
+           <EventAdder eventvisible={AddEventActive} onEventOpen={AddEvent}/>
            {/* <div className={`${} w-full h-full text-center bg-gray-700 bg-opacity-80 flex`} >
           
 
               
            </div> */}
            <div className='bg-transparent grid grid-cols-3 p-2'>
-                <p className='text-xl'>EIK Upload Tool</p>
+                <p className='hidden text-xl md:block'>{french ? "Outil de téléchargement":"EIK Upload Tool"}</p>
                 <div className='flex space-x-2 justify-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-</svg>
-<p className='uppercase text-bold cursor-pointer' onClick={()=>{
+              <span className='flex flex-col text-b cursor-pointer justify-center items-center rounded-xl px-4'  onClick={()=>{
     setAddLessonActive(!AddLessonActive)
-}} >Upload new material</p>
+}}>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+</svg>
+<p className='' > {french ? "Nouveau matériel": "New Material"}</p>
+              </span>
+             
+              <span className='flex flex-col text-b cursor-pointer justify-center items-center rounded-xl px-4'  onClick={()=>{
+     setAddEventActive(!AddEventActive)
+}}>
+           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+</svg>
+<p className='' > {french ? "Nouvel évènement": "New Event"}</p>
+              </span>
                 </div>
                 <div className='justify-right'>
                 <p className='text-right space-x-2 text-green-700'>{globalUser}
-                <span className='m-4'>Logout</span>
+                <span className='m-4'>
+                    <Link to="/">
+                        Logout
+                    </Link>
+                </span>
 
                 </p>
                 </div>
@@ -326,16 +459,16 @@ console.log(env.REACT_APP_appId)
             <div className={`${FocusLesson.docUUID ? '':'hidden'} border-l border-gray-200 w-2/5 py-3 px-8`}>
                 <p className='text-bold text-2xl'>{FocusLesson.title}</p>
                <ListItem title="Subject" value={FocusLesson.subject}/>
-                <ListItem title="Target Class" value={FocusLesson.targetClass}/>
-                <ListItem title="Teachers Email" value={FocusLesson.teacher} />
+                <ListItem title={french ? "Classe cible":"Target Class"} value={FocusLesson.targetClass}/>
+                <ListItem title={french ? "Courriel des enseignants":"Teachers Email"} value={FocusLesson.teacher} />
                 <ListItem title="Description" value={FocusLesson.description}/>
-                <ListItem title="File" value={FocusLesson.file}/>
-                <ListItem title="Date Uploaded" value={FocusLesson.dateUPloaded}/>
+                <ListItem title={french ? "Fichier":"File"} value={FocusLesson.file}/> 
+                <ListItem title={french ? "Date de téléchargement":"Date Uploaded"} value={FocusLesson.dateUPloaded}/>
                 <div className='flex space-x-4'>
                     <div onClick={()=>{
                         window.open(FocusLesson.file, '_blank')
                     }}>
-                    <Button text="Open" good={true}/>
+                    <Button text={french ? "Ouvrir":"Open" }good={true}/>
                     </div>
                     <DeleteButton />
                 </div>

@@ -7,10 +7,13 @@ import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
 import NewsComponent from './recentNews'
+let french = localStorage.getItem('language') == 'FR'
 
 export default function News() {
     window.scrollTo(0, 0)
     const [news, setNews] = useState()
+    const [mobile, setMobile] = useState(false);
+
     useEffect(()=>{
         const getNewsFromServer = async()=>{
             const allServerNews = [];
@@ -38,14 +41,16 @@ export default function News() {
 
     return (<ToastProvider>
         <div className="bg-gray-100">
-            <Header absolute={false} />
-           <TitleImage text="Latest news and events" image={schoollab}/>
-           <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
-           <div className="col-span-2">
+            <Header absolute={false} onBurgerClicked={()=>{
+                setMobile(!mobile);
+            }} />
+           <TitleImage text={french ?"Dernières nouvelles et événements":"Latest news and events"} image={schoollab}/>
+           <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="col-span-2 mb-4">
            <NewsComponent  news={news ? news: []} />
           
            </div>
-                <Menu />
+                <Menu mobile={mobile} />
            </div>
            <Footer />
         </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider, useToasts} from "react-toast-notifications"
@@ -11,12 +11,15 @@ let french = localStorage.getItem('language') == 'FR'
 
 export default function DutiesOfParents() {    
     window.scrollTo(0, 0)
+    const [mobile, setMobile] = useState(false);
 
     return (<ToastProvider>
         <div className="bg-gray-100">
-            <Header absolute={false} />
+            <Header absolute={false} onBurgerClicked={()=>{
+                setMobile(!mobile);
+            }}/>
            <TitleImage text={french ? "Devoirs des parents":"Duties of parents"} image={schoollab}/>
-           <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
            <div className="col-span-2">
             <Card title={french ? "Suivre les progrès de leur enfant à l'école":"Monitor their child’s progress in school"}
              description={french ? "Les parents doivent participer activement à l'école de leur enfant. Ils doivent savoir comment leur enfant progresse à l'école. Les portails de notation en ligne, les bulletins scolaires et les rapports de progrès de l'école fournissent aux parents une assez bonne image des performances de l'élève - notes, assiduité, comportement et évaluation de l'enseignant.":"Parents should have an active participation in their child’s school. They should be aware of how their child is progressing in school. The online grading portals, report cards and the school progress reports provide parents a pretty good picture of the student’s performance – grades, attendance, behavior, and evaluation of the teacher."} />
@@ -27,7 +30,7 @@ export default function DutiesOfParents() {
             <Card title={french ? "Participer aux activités scolaires":"Participate in School Activities"}
             description={french ? "Les activités scolaires sont d'excellentes occasions de réunir les élèves et les parents. Les élèves sont fortement encouragés à participer aux fonctions scolaires, aux concours et aux sports. Les enfants veulent naturellement montrer leurs talents et leurs compétences à tout le monde, en particulier leurs parents. C'est aussi une excellente occasion d'avoir une « impression » de l'environnement scolaire et de la façon dont les élèves interagissent les uns avec les autres":"School activities are great opportunities to bring together students and parents. Students are strongly encouraged to participate in school functions, contests, and sports. Children naturally want to exhibit their talents and skills for everyone to see, especially their parents. It’s also an excellent opportunity to get a “feel” of the school environment and how students interact with each other"}/>
            </div>
-                <Menu />
+                <Menu mobile={mobile} />
            </div>
            <Footer />
         </div>

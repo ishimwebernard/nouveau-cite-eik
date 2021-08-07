@@ -2,33 +2,40 @@ import React from 'react'
 import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider} from "react-toast-notifications"
+import arton from '../assets/arton8.png'
 
 import Header from './header';
 import Menu from './menu';
 import Footer from './footer'
 export default function HeadOfSchoolWelcome() {
     window.scrollTo(0, 0)
+    let french = localStorage.getItem('language') == 'FR'
+
 
     return (<ToastProvider>
         <div className="bg-gray-100">
             <Header absolute={false} />
-           <TitleImage text="Head of school's welcome" image={schoollab}/>
-           <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
-           <div className="col-span-2 ">
-           <div className="grid grid-cols-2 h-56">
+           <TitleImage text={french ? "Accueil du chef d'établissement":"Head of school's welcome"} image={schoollab}/>
+           <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="col-span-2 flex flex-col ">
+           <div className="grid grid-cols-2 ">
                <div className="">
-                <p className="text-5xl font-semibold text-gray-800">Murekeyisoni Sylivie</p>
-                <p className="text-2xl">Head of school </p>
+                <p className="text-5xl font-bold text-gray-800">Murekeyisoni Sylivie</p>
+                <p className="text-2xl">{french ? 'Chef d\'établissement':'Head of school'} </p>
            </div>
-           <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+           
+            <img src={arton} className=" w-3/4 rounded-xl shadow-xl"/>
            </div>
-           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+           <p className='mt-4'>
+            {french ? `
+            L’idée d’ouvrir une école est née en 1997 pour répondre aux besoins des parents qui souhaitaient que leurs enfants suivent des cours en français, alors que les établissements pouvant y répondre étaient limités ou surchargés. Par ailleurs les parents de Kigali n’ont pas le temps de suivre l’étude et les devoirs de leurs enfants à la maison suite à leurs occupations.
+            
+            C’est pour cela que quelques parents ayant une expérience et le souci de l’éducation se sont mis ensemble au sein d’une asbl, pour créer une école répondant à cette préoccupation urgente et prioritaire qu’est l’éducation des enfants
+            
+            `:`
+            The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations.
+This is why some parents with experience and concern for education came together in an association, to create a school meeting this urgent concern and priority is education of children
+            `}
 
            </p>
            </div>

@@ -67,7 +67,8 @@ const LessonsView = ({lessonShifter}) =>{
                             <Lesson lesson={lesson} lessonShifter={lessonShifter} />
                         )
                     }
-                  
+                    setFullRows(rows)
+                  return 
                 }
             }catch(error){
                 addToast('SOmething went wrong', {appearance: "error"})
