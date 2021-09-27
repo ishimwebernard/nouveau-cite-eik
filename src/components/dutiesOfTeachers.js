@@ -3,7 +3,6 @@ import TitleImage from './titleimage';
 import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider} from "react-toast-notifications"
 import Header from './header';
-import Menu from './menu';
 import Footer from './footer'
 let french = localStorage.getItem('language') == 'FR'
 
@@ -25,7 +24,6 @@ export default function DutiesOfStudents() {
             <Card title={french ? "Un parent externe":"An External Parent"}
             description={french ? "Le rôle d'un enseignant transcende le fait de suivre un plan de cours et un horaire de travail spécifiques. Parce que les élèves et les enseignants passent autant de temps ensemble, l'enseignant devient par inadvertance un parent externe. Les enseignants peuvent être un mentor pour aider à mettre l'enfant sur la bonne voie. Dans ce rôle, l'enseignant peut encourager l'élève à être le meilleur possible, et également être une source d'inspiration et de conseils pour les élèves.":"The role of a teacher transcends following a specific lesson plan and work schedule. Because both students and teachers spend as much time together, the teacher inadvertently becomes an external parent. Teachers can be a mentor to help set the child on the right path. In this role, the teacher can encourage the student to be the best they can be, and also be a source of inspiration and advice to the students."}/>
            </div>
-                <Menu mobile={mobile} />
            </div>
            <Footer />
         </div></ToastProvider>

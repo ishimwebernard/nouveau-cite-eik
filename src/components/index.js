@@ -2,7 +2,6 @@ import {ToastProvider} from "react-toast-notifications"
 import React, { useState, useEffect } from 'react';
 import Header from './header';
 import SlideShow from './slideshow';
-import Menu from './menu'
 import Reasons from './reasonstojoineik'
 import News from './recentNews'
 import KeyLinks from './keyLinks'
@@ -50,13 +49,12 @@ export default function Main() {
             <SlideShow  />
             </div>
             </div>
-            <div className="md:grid md:grid-cols-3 px-7 space-x-4 mt-10">
+            <div className="w-full px-7 space-x-4 mt-10">
                 <div className=" md:col-span-2 "> 
                     <Reasons />
                     <News  news={news ? news: []} />
                     <KeyLinks />
                 </div>
-                <Menu mobile={mobile}/>
             </div>
             <Footer />
 

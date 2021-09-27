@@ -4,7 +4,6 @@ import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider} from "react-toast-notifications"
 
 import Header from './header';
-import Menu from './menu';
 import Footer from './footer'
 
 export default function Extracuricular() {
@@ -22,7 +21,6 @@ export default function Extracuricular() {
             <Card image={schoollab}  title="To prepare exams" description="The idea of ​​opening a school was created in 1997 to meet the needs of parents who wanted their children to attend classes in French, while institutions can respond were restricted or overloaded. Moreover parents Kigali does not have time to study and monitor their children’s homework at home due to their occupations." />
            </div>
            </div>
-                <Menu />
            </div>
            <Footer />
         </div></ToastProvider>

@@ -1,14 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react';
 import {Link} from "react-router-dom";
-import { useToasts } from 'react-toast-notifications';
-
 import CustomButton from './Button';
+import axios from 'axios'
+import { useToasts } from 'react-toast-notifications';
+import { useHistory } from "react-router-dom";
+import UserContext from './userGLobal'
+import {ToastProvider} from "react-toast-notifications"
+import { createPortal } from 'react-dom';
+import { Tab, Tabs } from 'react-bootstrap'
+import CodeBreaker from '../assets/codebreaker.jpg'
+
 let french = localStorage.getItem('language') == 'FR'
+
+
 
 const Header = ({ title }) =>{
     return (
         <div className="px-6 bg-green-700">
               <p className="text-gray-100 text-xl py-2">{title}</p>  
+        </div>
+    )
+}
+
+
+const MenuItem = ({ itemText, itemArray, itemLink }) =>{
+    const [expanded, setExpanded] = useState(false);
+    const [redundant, setRedundant] = useState(false);
+    const rows = [];
+    if(itemArray !== undefined){
+        for(let counter=0; counter< itemArray.length; counter++){
+            let k= "/"+itemArray[counter].route;
+
+            rows.push(
+                    <Link to={k}  onClick={()=>{
+                        setRedundant(!redundant);
+                    }}>
+                <p className="text-gray-900 text-md ml-4 p-0 p-2 ">{itemArray[counter].text}</p>
+                </Link>
+            )
+        }
+    }
+
+    return (
+        <div className="px-6 cursor-pointer ">
+                <p className="font-semibold text-md "  onClick={()=>{
+                    setExpanded(!expanded);
+                }}    >{itemText}</p>
+                {expanded ? <div>{rows}</div> : ''}
         </div>
     )
 }
@@ -67,6 +105,8 @@ const StudentLogin = () =>{
         </div>
     )
 }
+
+
 const LoginUser = async(email, password) =>{
     const data = {
         "email": email,
@@ -85,59 +125,28 @@ const LoginUser = async(email, password) =>{
     return {error: error.response.data.data}
 }
 }
-const MenuItem = ({ itemText, itemArray, itemLink }) =>{
-    const [expanded, setExpanded] = useState(false);
-    const [redundant, setRedundant] = useState(false);
-    const rows = [];
-    if(itemArray !== undefined){
-        for(let counter=0; counter< itemArray.length; counter++){
-            let k= "/"+itemArray[counter].route;
 
-            rows.push(
-                    <Link to={k}  onClick={()=>{
-                        setRedundant(!redundant);
-                    }}>
-                <p className="text-gray-900 text-md ml-4 p-0 p-2 ">{itemArray[counter].text}</p>
-                </Link>
-            )
-        }
-    }
+export default function Portal({loginErrorFunction}){
+return (
+    <ToastProvider>
+        <img src={CodeBreaker} className='w-screen h-screen object-cover' />
+  <div className='flex bg-gray-600 bg-opacity-60 object-fit h-screen w-screen absolute top-0'>
+      <div className='w-1/3'></div>
+ <div className="justify-center w-1/3 px-1/3 items-center mt-1/3 h-1/2 mt-8 rounded-xl  bg-gray-50 p-4">
+   
+   <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+ <Tab eventKey="home" title="Student Login">
+ <StudentLogin />
+ </Tab>
+ <Tab eventKey="profile" title="Teachers Login">
+ <LoginSnippet loginErrorFunction={loginErrorFunction}/>
+ </Tab>
+</Tabs>
+</div>
 
-    return (
-        <div className="px-6 cursor-pointer ">
-                <p className="font-bold text-md "  onClick={()=>{
-                    setExpanded(!expanded);
-                }}    >{itemText}</p>
-                {expanded ? <div>{rows}</div> : ''}
-        </div>
-    )
-}
-
-export default function BurgerMenu({visible}) {
-    return (
-        <div className={`${visible ? '':'hidden'}`} >
-             <Header title="Menu"  />
-            <Link to="/">
-            <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Accueil":"Home"}</p>
-            </Link>
-            <MenuItem itemText={french ? "À propos":"About"} itemArray={[{text:french ? "Qui nous sommes":"Who we are", route:"whoweare"}, {text:french ? "Mission et vision":"Mission and vision", route:"missionandvision"}, {text: french ? "Accueil du chef d'établissement":"Head of School welcome", route:"hoswelcome"}]}/>
-            <MenuItem itemText={french ? "Stratégie":"Strategy"} itemArray={[{text:french ? "Les devoirs des parents":"Duties of parents", route:"dutiesofparents"}, {text:french ? "Les devoirs des étudiants":"Duties of Students", route:"dutiesofstudents"}, {text:french ? "Devoirs des enseignants":"Duties of Teachers", route:"dutiesofteachers"}]}/>
-            <Link to="/facilities">
-            <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Installations scolaires":"School Facilities"}</p>
-            </Link>
-            <Link to="/news">
-            <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Nouvelles et Evènements":"News and events"}</p>
-            </Link>              <Link to="/contact">
-            <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Nous contacter":"Contact Us"}</p>
-            </Link>
-            <Header title="Student Login"/>
-           <StudentLogin />
-            <div className='py-4' >
-            <Header title="Teachers Login"/>
-            <LoginSnippet />
-        </div>
-        </div>
-    )
+  </div>
+</ToastProvider>
+)
 }
 
 const LoginSnippet = () =>{
@@ -181,3 +190,6 @@ const LoginSnippet = () =>{
         </div>
     )
 }
+/**
+ * 
+ */

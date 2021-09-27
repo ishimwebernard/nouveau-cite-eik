@@ -4,7 +4,6 @@ import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider, useToasts} from "react-toast-notifications"
 
 import Header from './header';
-import Menu from './menu';
 import Footer from './footer'
 import BigCard from './bigCard'
 let french = localStorage.getItem('language') == 'FR'
@@ -30,7 +29,6 @@ export default function DutiesOfParents() {
             <Card title={french ? "Participer aux activités scolaires":"Participate in School Activities"}
             description={french ? "Les activités scolaires sont d'excellentes occasions de réunir les élèves et les parents. Les élèves sont fortement encouragés à participer aux fonctions scolaires, aux concours et aux sports. Les enfants veulent naturellement montrer leurs talents et leurs compétences à tout le monde, en particulier leurs parents. C'est aussi une excellente occasion d'avoir une « impression » de l'environnement scolaire et de la façon dont les élèves interagissent les uns avec les autres":"School activities are great opportunities to bring together students and parents. Students are strongly encouraged to participate in school functions, contests, and sports. Children naturally want to exhibit their talents and skills for everyone to see, especially their parents. It’s also an excellent opportunity to get a “feel” of the school environment and how students interact with each other"}/>
            </div>
-                <Menu mobile={mobile} />
            </div>
            <Footer />
         </div>

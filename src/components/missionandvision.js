@@ -3,7 +3,6 @@ import TitleImage from './titleimage';
 import {ToastProvider} from 'react-toast-notifications'
 import MissionAndVisionPicture from '../assets/focusgirl.jpg'
 import Header from './header';
-import Menu from './menu';
 import Footer from './footer'
 
 export default function MissionAndVision() {
@@ -13,13 +12,12 @@ export default function MissionAndVision() {
         <div className="bg-gray-50">
             <Header absolute={false} />
            <TitleImage text="MISSION AND VISION" image={MissionAndVisionPicture}/>
-           <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="w-full px-7 mt-10 space-x-4">
            <div className="col-span-2">
             <p className="text-6xl text-gray-800">Mission and Vision</p>
             <Mission />
             <Vision />
            </div>
-                <Menu />
            </div>
            <Footer />
         </div></ToastProvider>

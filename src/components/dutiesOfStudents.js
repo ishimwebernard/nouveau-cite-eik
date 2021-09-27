@@ -4,7 +4,6 @@ import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider} from "react-toast-notifications"
 
 import Header from './header';
-import Menu from './menu';
 import Footer from './footer'
 let french = localStorage.getItem('language') == 'FR'
 
@@ -27,7 +26,6 @@ description={french ? "Les élèves doivent venir à l'école prêts à particip
 
           
            </div>
-                <Menu mobile={mobile} />
            </div>
            <Footer />
         </div>

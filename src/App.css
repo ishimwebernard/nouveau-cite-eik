@@ -13,18 +13,13 @@ html,body{
   background: #f3f4f6a6;
   backdrop-filter: blur(20px);
 }
-.title-confortaa{
-  font-family: 'Comfortaa', cursive;
-  letter-spacing: -0.05em;
-}
+
 
 .centeredheight{
   top: 50%;
   transform: translate(0, -50%);
 }
-*{
-  font-family: 'Poppins', sans-serif;
-}
+
 .button-background{
   background: linear-gradient(180deg, #059669, #047857);
 }

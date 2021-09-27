@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Header from './header'
-import Menu from './menu'
 import {ToastProvider} from "react-toast-notifications"
 import Footer from './footer'
 import Skeleton from 'react-loading-skeleton';
@@ -72,7 +71,7 @@ export default function NewsViewer({title}) {
         <ToastProvider>
         <div className="bg-gray-50 h-screen w-full flex flex-col" >
         <Header absolute={false} />
-        <div className="bg-gray-50 md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
+        <div className="bg-gray-50 w-full px-7 mt-10 space-x-4">
            <div className="md:col-span-2 py-2">
               <div className={loading ? '':'hidden'}>
               <NewsSkeleton /> 
@@ -81,7 +80,7 @@ export default function NewsViewer({title}) {
             <NewsComponent title={newsItem.title} parag={newsItem.body} image={newsItem.picture} />
             </div>
            </div>
-           <Menu />
+          
         </div>
         <Footer />
         </div>

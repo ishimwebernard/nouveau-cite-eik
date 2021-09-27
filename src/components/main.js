@@ -16,6 +16,7 @@ import MyAccount from './MyAccount'
 import StudentAccount from './student'
 import NewsViewer from './newsViewer'
 import News from './news'
+import Portal from './portal'
 const news = [
     {title: 'Bernard gets turing award', body: 'Ohh my', image: {schoollab}}
 ]
@@ -44,6 +45,7 @@ export default function Main() {
                   <Route exact path="/news" component={News} />
                   <Route exact path="/student" component={StudentAccount}/>
                   <Route exact path="/myaccount" component={MyAccount}/>
+                  <Route exact path="/portal" component={Portal} />
                   <Route exact path="/newsandevents/:pathId" render={({match})=>(
                       <NewsViewer title={match.params.pathId} /> 
                   )} />

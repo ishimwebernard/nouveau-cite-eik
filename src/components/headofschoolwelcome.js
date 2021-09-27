@@ -5,7 +5,6 @@ import {ToastProvider} from "react-toast-notifications"
 import arton from '../assets/arton8.png'
 
 import Header from './header';
-import Menu from './menu';
 import Footer from './footer'
 export default function HeadOfSchoolWelcome() {
     window.scrollTo(0, 0)
@@ -16,9 +15,9 @@ export default function HeadOfSchoolWelcome() {
         <div className="bg-gray-100">
             <Header absolute={false} />
            <TitleImage text={french ? "Accueil du chef d'établissement":"Head of school's welcome"} image={schoollab}/>
-           <div className="md:grid md:grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="px-7 mt-10 space-x-4">
            <div className="col-span-2 flex flex-col ">
-           <div className="grid grid-cols-2 ">
+           <div className="grid grid-cols-2 px-40 ">
                <div className="">
                 <p className="text-5xl font-bold text-gray-800">Murekeyisoni Sylivie</p>
                 <p className="text-2xl">{french ? 'Chef d\'établissement':'Head of school'} </p>
@@ -39,7 +38,7 @@ This is why some parents with experience and concern for education came together
 
            </p>
            </div>
-                <Menu />
+               
            </div>
            <Footer />
         </div></ToastProvider>

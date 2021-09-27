@@ -4,7 +4,6 @@ import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider} from "react-toast-notifications"
 import axios from "axios"
 import Header from './header';
-import Menu from './menu';
 import Footer from './footer'
 import NewsComponent from './recentNews'
 let french = localStorage.getItem('language') == 'FR'
@@ -50,7 +49,6 @@ export default function News() {
            <NewsComponent  news={news ? news: []} />
           
            </div>
-                <Menu mobile={mobile} />
            </div>
            <Footer />
         </div>

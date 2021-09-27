@@ -4,7 +4,6 @@ import schoollab from '../assets/schoollab.jpg'
 import {ToastProvider} from "react-toast-notifications"
 
 import Header from './header';
-import Menu from './menu';
 import Footer from './footer' 
 let french = localStorage.getItem('language') == 'FR'
 
@@ -17,7 +16,7 @@ export default function WhoWeAre() {
                 setMobile(!mobile);
             }} />
            <TitleImage text={french ? "Qui nous sommes":"Who we are"} image={schoollab}/>
-           <div className="grid grid-cols-3 px-7 mt-10 space-x-4">
+           <div className="w-full px-7 mt-10 space-x-4">
            <div className="col-span-2">
             <p className="text-6xl text-gray-800">{french ? "Qui nous sommes":"Who we are"}</p>
             <p className="text-gray-600">
@@ -25,7 +24,6 @@ export default function WhoWeAre() {
 This is why some parents with experience and concern for education came together in an association, to create a school meeting this urgent concern and priority is education of children
             </p>
            </div>
-                <Menu mobile={mobile}  />
            </div>
            <Footer />
         </div></ToastProvider>
