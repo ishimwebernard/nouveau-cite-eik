@@ -33,7 +33,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "react-dotenv && craco start",
+    "start": "CI=false react-dotenv && craco start",
     "dev": "react-dotenv &&  craco build && craco start",
     "build": "CI=false react-dotenv &&  craco build",
     "test": "react-dotenv &&  craco test",
