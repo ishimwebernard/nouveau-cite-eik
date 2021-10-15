@@ -314,12 +314,23 @@ console.log(env.REACT_APP_appId)
                    console.log(e.target.value)
                    settargetClass(e.target.value)
                }}>
-                   <option value='p1'>{french ? "Première année":"Primary 1"}</option>
-                   <option value='p2'>{french ? "Deuxième année":"Primary 2"}</option>
-                   <option value='p3'>{french ? "Troisième année":"Primary 3"}</option>
-                   <option value='p4'>{french ? "Quatrième année":"Primary 4"}</option>
-                   <option value='p5'>{french ? "Cinquième année":"Primary 5"}</option>
-                   <option value='p6'>{french ? "Sixième année":"Primary 6"}</option>
+                   <option value='p1a'>{french ? "Première année A":"Primary 1 A"}</option>
+                   <option value='p1b'>{french ? "Première année B":"Primary 1 B"}</option>
+                   <option value='p2a'>{french ? "Deuxième année A":"Primary 2 A"}</option>
+                   <option value='p2b'>{french ? "Deuxième année B":"Primary 2 B"}</option>
+                   <option value='p2c'>{french ? "Deuxième année C":"Primary 2 C"}</option>
+                   <option value='p2d'>{french ? "Deuxième année D":"Primary 2 D"}</option>
+                   <option value='p3a'>{french ? "Troisième année A":"Primary 3 A"}</option>
+                   <option value='p3b'>{french ? "Troisième année B":"Primary 3 B"}</option>
+
+                   <option value='p4a'>{french ? "Quatrième année A":"Primary 4 A"}</option>
+                   <option value='p4b'>{french ? "Quatrième année B":"Primary 4 B"}</option>
+                   <option value='p4c'>{french ? "Quatrième année C":"Primary 4 C"}</option>
+                   <option value='p5a'>{french ? "Cinquième année A":"Primary 5 A"}</option>
+                   <option value='p5b'>{french ? "Cinquième année B":"Primary 5 B"}</option>
+                   <option value='p5c'>{french ? "Cinquième année C":"Primary 5 C"}</option>
+                   <option value='p6a'>{french ? "Sixième année A":"Primary 6 A"}</option>
+                   <option value='p6b'>{french ? "Sixième année B":"Primary 6 B"}</option>
                </select>
                <InputText placeHolder="Title" onChange={(e)=>{
                    settitle(e.target.value)

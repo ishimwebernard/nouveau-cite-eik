@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-dotenv && craco start",
     "dev": "react-dotenv &&  craco build && craco start",
-    "build": "CI=false react-dotenv &&  craco build",
+    "build": " react-dotenv &&  craco build",
     "test": "react-dotenv &&  craco test",
     "eject": "react-dotenv &&  react-scripts eject",
     "deploy": "react-dotenv &&  craco build && firebase deploy"

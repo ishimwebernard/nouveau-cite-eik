@@ -48,7 +48,7 @@ export default function Header({ onBurgerClicked }) {
         >
           <NavDropdown.Item href="whoweare">{french ? "Qui nous sommes":"Who we are"}</NavDropdown.Item>
           <NavDropdown.Item href="missionandvision">{french ? "Mission et vision":"Mission and vision"}</NavDropdown.Item>
-          <NavDropdown.Item href="hoswelcome">{french ? "Accueil du chef d'établissement":"Head of School welcome"}</NavDropdown.Item>
+          <NavDropdown.Item href="hoswelcome">{french ? "Message de la directrice":"Head mistress message"}</NavDropdown.Item>
           {/* <NavDropdown.Divider />
           <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
         </NavDropdown>
