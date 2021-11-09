@@ -120,7 +120,7 @@ export default function BurgerMenu({visible}) {
             <Link to="/">
             <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Accueil":"Home"}</p>
             </Link>
-            <MenuItem itemText={french ? "À propos":"About"} itemArray={[{text:french ? "Qui nous sommes":"Who we are", route:"whoweare"}, {text:french ? "Mission et vision":"Mission and vision", route:"missionandvision"}, {text: french ? "Accueil du chef d'établissement":"Head of School welcome", route:"hoswelcome"}]}/>
+            <MenuItem itemText={french ? "À propos":"About"} itemArray={[{text:french ? "Qui nous sommes":"Who we are", route:"whoweare"}, {text:french ? "Mission et vision":"Mission and vision", route:"missionandvision"}, {text: french ? "Message de la directrice":"Head of School welcome", route:"hoswelcome"}]}/>
             <MenuItem itemText={french ? "Stratégie":"Strategy"} itemArray={[{text:french ? "Les devoirs des parents":"Duties of parents", route:"dutiesofparents"}, {text:french ? "Les devoirs des étudiants":"Duties of Students", route:"dutiesofstudents"}, {text:french ? "Devoirs des enseignants":"Duties of Teachers", route:"dutiesofteachers"}]}/>
             <Link to="/facilities">
             <p className="font-bold text-md px-6 cursor-pointer text-gray-900 ">{french ? "Installations scolaires":"School Facilities"}</p>

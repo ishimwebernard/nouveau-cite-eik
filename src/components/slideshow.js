@@ -48,7 +48,7 @@ export default function SlideShow() {
       <p>{french ? "Rejoignez EIK aujourd'hui":"Join EIK today"}</p>
     </Carousel.Caption>
   </Carousel.Item>
-  <Carousel.Item>
+  {/* <Carousel.Item>
     <img
       className=" w-full resize-carousel"
       src={schoollab}
@@ -59,7 +59,7 @@ export default function SlideShow() {
     <h3>{french ? "Différentes méthodes d'apprentissage":"Different learning methods"}</h3>
       <p>{french ? "Rejoignez EIK aujourd'hui":"Join EIK today"}</p>
     </Carousel.Caption>
-  </Carousel.Item>
+  </Carousel.Item> */}
 </Carousel>
         </div>
     </div>

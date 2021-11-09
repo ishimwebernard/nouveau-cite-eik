@@ -14,13 +14,13 @@ export default function HeadOfSchoolWelcome() {
     return (<ToastProvider>
         <div className="bg-gray-100">
             <Header absolute={false} />
-           <TitleImage text={french ? "Accueil du chef d'établissement":"Head of school's welcome"} image={schoollab}/>
+           <TitleImage text={french ? "Message de la Directrice":"Head of school's welcome"} image={schoollab}/>
            <div className="px-7 mt-10 space-x-4">
            <div className="col-span-2 flex flex-col ">
            <div className="grid grid-cols-2 px-40 ">
                <div className="">
-                <p className="text-5xl font-bold text-gray-800">Murekeyisoni Sylivie</p>
-                <p className="text-2xl">{french ? 'Chef d\'établissement':'Head of school'} </p>
+                <p className="text-5xl font-bold text-gray-800">Murekeyisoni Sylvie</p>
+                <p className="text-2xl">{french ? 'Directrice':'Head of school'} </p>
            </div>
            
             <img src={arton} className=" w-3/4 rounded-xl shadow-xl"/>
