@@ -23,7 +23,9 @@ export default function KeyLinks() {
                 <p className="text-4xl text-green-700 title-confortaa">{french ? "Liens Clés":"Key Links"}</p>
                 </div>
                 <div className="grid grid-cols-3 space-x-2 md:flex md:space-x-4 items-top ">
-                <LinkItem title="Academic Bridge"/>
+              <a href="https://academicbridge.xyz/">
+              <LinkItem title="Academic Bridge"/>
+              </a>
               
                 </div>
                         
